@@ -1,5 +1,6 @@
 package com.example.qsproject.qsproject;
 
-// methods
+// methods to do
 public class Manager {
+
 }
