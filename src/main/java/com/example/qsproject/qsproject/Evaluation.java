@@ -16,6 +16,6 @@ public class Evaluation {
     private int evaluationId;
 
 
-    @Column
+    @Column(name = "type",nullable = false,unique = true)
     private String evaluationType;
 }

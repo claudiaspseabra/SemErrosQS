@@ -15,10 +15,10 @@ public class Classroom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int classroomId;
 
-    @Column
+    @Column(name = "capacity",nullable = false)
     private int capacity;
 
-    @Column
+    @Column(name = "computer",nullable = false)
     private boolean computers;
 
 }

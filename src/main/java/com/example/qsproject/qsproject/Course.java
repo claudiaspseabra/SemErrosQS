@@ -16,9 +16,9 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int courseId;
 
-    @Column
+    @Column(name = "name",unique = true,nullable = false)
     private String courseName;
 
-    @Column
-    private ArrayList<Subject> cadeiras;
+    @Column(name = "subjects")
+    private ArrayList<Subject> subjects;
 }

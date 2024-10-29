@@ -15,7 +15,7 @@ public class Subject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int subjectId;
 
-    @Column
+    @Column(name = "name",nullable = false,unique = true)
     private String subjectName;
 
 }
