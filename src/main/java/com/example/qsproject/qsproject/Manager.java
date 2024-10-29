@@ -1,5 +1,5 @@
 package com.example.qsproject.qsproject;
 
 // methods
-public class manager {
+public class Manager {
 }

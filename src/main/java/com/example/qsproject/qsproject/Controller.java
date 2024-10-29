@@ -1,4 +1,4 @@
 package com.example.qsproject.qsproject;
 
-public class controller {
+public class Controller {
 }

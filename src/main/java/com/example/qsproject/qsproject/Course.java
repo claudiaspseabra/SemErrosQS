@@ -20,5 +20,5 @@ public class Course {
     private String courseName;
 
     @Column
-    private ArrayList<Cadeira> cadeiras;
+    private ArrayList<Subject> cadeiras;
 }
