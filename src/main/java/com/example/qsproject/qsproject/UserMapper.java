@@ -12,7 +12,7 @@ public class UserMapper {
         );
     }
 
-    // Serve para converter um UserDto em User, por exemplo ao receber algum input num website
+    // Serve para converter um UserDto em User, por exemplo ao receber algum input num website/app
     public static User mapToUser(UsersDto usersDto){
         return new User(
                 usersDto.getUserId(),
