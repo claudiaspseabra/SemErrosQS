@@ -15,4 +15,11 @@ public class UserServiceImpl implements UserService{
 
         return UserMapper.mapToUserDto(saveUser);
     }
+
+    @Override
+    public UsersDto getUserById(int id) {
+        User user = usersRespository.findById(id)
+                .orElseThrow(()-> new Exceptions("Admin not found with this id: "+id));
+        return UserMapper.mapToUserDto(user);
+    }
 }
