@@ -18,7 +18,7 @@ public class Classroom {
     @Column(name = "capacity",nullable = false)
     private int capacity;
 
-    @Column(name = "computer",nullable = false)
+    @Column(name = "computers",nullable = false)
     private boolean computers;
 
 }
