@@ -5,4 +5,7 @@ public interface UserService {
     UsersDto createUser(UsersDto usersDto);
 
     UsersDto getUserById(int id);
+
+    //05/11
+    UsersDto deleteUserById(int id);
 }
