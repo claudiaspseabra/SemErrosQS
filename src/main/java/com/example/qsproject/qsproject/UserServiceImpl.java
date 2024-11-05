@@ -12,7 +12,6 @@ public class UserServiceImpl implements UserService{
     public UsersDto createUser(UsersDto usersDto) {
         User user = UserMapper.mapToUser(usersDto);
         User saveUser = usersRespository.save(user);
-
         return UserMapper.mapToUserDto(saveUser);
     }
 
@@ -25,9 +24,10 @@ public class UserServiceImpl implements UserService{
     }
 
 
+    // 05/11
     @Override
     public UsersDto deleteUserById(int id){
-        User user = usersRespository.findById(id).orElseThrow(()-> new Exceptions("Couldnt remove admin with this id:"+id));
+        User user = usersRespository.findById(id).orElseThrow(()-> new Exceptions("Couldnt remove admin with this id: "+id));
         usersRespository.delete(user);
         return UserMapper.mapToUserDto(user);
     }
