@@ -4,7 +4,7 @@ package com.example.qsproject.qsproject;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
+// test
 @Getter
 @Setter
 
@@ -15,10 +15,9 @@ public class Classroom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int classroomId;
 
-    @Column
+    @Column(name = "capacity",nullable = false)
     private int capacity;
 
-    @Column
+    @Column(name = "computers",nullable = false)
     private boolean computers;
-
 }

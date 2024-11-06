@@ -8,14 +8,14 @@ import lombok.Setter;
 @Setter
 
 @Entity
-@Table(name = "cadeiras")
-public class Cadeira {
+@Table(name = "subjects")
+public class Subject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cadeiraId;
+    private int subjectId;
 
-    @Column
-    private String name;
+    @Column(name = "subjectName",nullable = false,unique = true)
+    private String subjectName;
 
 }
