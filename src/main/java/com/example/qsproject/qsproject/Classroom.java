@@ -7,7 +7,7 @@ import lombok.Setter;
 // test
 @Getter
 @Setter
-
+//TESTE
 @Entity
 @Table(name = "classrooms")
 public class Classroom {
