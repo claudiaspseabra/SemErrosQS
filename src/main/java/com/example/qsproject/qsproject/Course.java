@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 @Getter
 @Setter
+
 @Entity
 @Table(name = "courses")
 public class Course {

@@ -18,4 +18,7 @@ public class Evaluation {
 
     @Column(name = "evaluationType",nullable = false,unique = true)
     private String evaluationType;
+
+    @Column(name="needComp",nullable = false)
+    private boolean needComp;
 }

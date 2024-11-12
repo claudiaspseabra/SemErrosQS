@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+
 @Getter
 @Setter
 
@@ -18,4 +20,9 @@ public class Subject {
     @Column(name = "subjectName",nullable = false,unique = true)
     private String subjectName;
 
+    @Column(name="evaluations",nullable = false)
+    private ArrayList<Evaluation> evaluations;
+
+    @Column(name = "studentsEnrolled",nullable = false)
+    private int studentsEnrolled;
 }
