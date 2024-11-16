@@ -1,10 +1,14 @@
-package com.example.qsproject.qsproject;
+package com.example.qsproject.qsproject.controllers;
 
+import com.example.qsproject.qsproject.services.UserService;
+import com.example.qsproject.qsproject.dtos.UsersDto;
+import com.example.qsproject.qsproject.repositories.UsersRespository;
 import lombok.AllArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 // to do
 @AllArgsConstructor
@@ -34,6 +38,12 @@ public class UserController {
         return new ResponseEntity<>(deleteUsersDto, HttpStatus.OK);
     }
 
+
+    @GetMapping()
+    public ResponseEntity<List<UsersDto>> getAllUsers(){
+        List<UsersDto> users = userService.getAllUsers();
+        return ResponseEntity.ok(users);
+    }
 
     /*
 

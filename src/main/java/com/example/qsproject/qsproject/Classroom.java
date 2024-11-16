@@ -1,24 +1,34 @@
 package com.example.qsproject.qsproject;
 
-
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
+
 // test
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 //TESTE
 @Entity
 @Table(name = "classrooms")
 public class Classroom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int classroomId;
+    private long classroomId;
 
     @Column(name = "capacity",nullable = false)
     private int capacity;
 
     @Column(name = "computers",nullable = false)
     private boolean computers;
+
+    @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
+    private List<Evaluation> evaluations;
+
 
 }
