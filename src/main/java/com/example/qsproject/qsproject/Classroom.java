@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Date;
 import java.util.List;
 
 // test
@@ -30,5 +31,13 @@ public class Classroom {
     @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
     private List<Evaluation> evaluations;
 
+    @Column(name = "classroomInUseDate",nullable = true)
+    private Date classroomInUseDate;
+
+    /*
+        @Column(name = "classroomType",nullable = false)
+    private String classroomType;
+
+     */
 
 }

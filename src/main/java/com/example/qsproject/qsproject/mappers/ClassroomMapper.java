@@ -6,6 +6,7 @@ import com.example.qsproject.qsproject.dtos.CourseDto;
 import com.example.qsproject.qsproject.dtos.SubjectDto;
 import com.example.qsproject.qsproject.dtos.UsersDto;
 
+import java.sql.Date;
 import java.util.List;
 
 public class ClassroomMapper {
@@ -15,7 +16,8 @@ public class ClassroomMapper {
                 classroom.getClassroomId(),
                 classroom.getCapacity(),
                 classroom.isComputers(),
-                classroom.getEvaluations()
+                classroom.getEvaluations(),
+                classroom.getClassroomInUseDate()
         );
     }
 
@@ -24,7 +26,8 @@ public class ClassroomMapper {
                 classroomDto.getClassroomId(),
                 classroomDto.getCapacity(),
                 classroomDto.isComputers(),
-                classroomDto.getEvaluations()
+                classroomDto.getEvaluations(),
+                classroomDto.getClassroomInUseDate()
         );
     }
 }
