@@ -1,0 +1,9 @@
+Interface:
+
+- Quando entro no site pede login.
+- Depois de dar login seleciono o curso que quero criar o mapa.
+- Adicionar as avaliações no mapa
+- Ao adicionar uma prova/teste/qualquer coisa temos de dizer em que época é
+    - Caso a cadeira tenha avaliação mista precisa de 2 momentos de avaliação e 1 deles tem de ser em epoca de exames.
+    - Continua é preciso tres avaliações no minimo
+- Ao correr a aplicação as cadeiras ja existem juntamente com os cursos.

@@ -1,6 +1,11 @@
-package com.example.qsproject.qsproject;
+package com.example.qsproject.qsproject.services;
+
+import com.example.qsproject.qsproject.dtos.UsersDto;
+
+import java.util.List;
 
 // Interface com os métodos que terao de ser utilizados no UserServiceImpl
+
 public interface UserService {
     UsersDto createUser(UsersDto usersDto);
 
@@ -8,4 +13,6 @@ public interface UserService {
 
     //05/11
     UsersDto deleteUserById(int id);
+
+    List<UsersDto> getAllUsers();
 }
