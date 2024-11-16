@@ -20,6 +20,9 @@ public class Course {
     @Column(name = "courseName",unique = true,nullable = false)
     private String courseName;
 
+    @Column(name = "years" , nullable = false)
+    private int years;
+
     @Column(name = "subjects")
     private ArrayList<Subject> subjects;
 }

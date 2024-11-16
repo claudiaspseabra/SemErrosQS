@@ -21,6 +21,4 @@ public class Classroom {
     @Column(name = "computers",nullable = false)
     private boolean computers;
 
-    @Column(name="inUser", nullable = false)
-    private boolean inUser;
 }

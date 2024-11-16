@@ -20,7 +20,7 @@ public class Subject {
     @Column(name = "subjectName",nullable = false,unique = true)
     private String subjectName;
 
-    @Column(name="evaluations",nullable = false)
+    @Column(name="evaluations")
     private ArrayList<Evaluation> evaluations;
 
     @Column(name = "studentsEnrolled",nullable = false)
