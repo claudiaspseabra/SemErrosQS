@@ -15,6 +15,7 @@ public class EvaluationMapper {
                 evaluation.getEvaluationId(),
                 evaluation.getEvaluationType(),
                 evaluation.isNeedComp(),
+                evaluation.getEvaluationWeight(),
                 evaluation.getSubject(),
                 evaluation.getClassroom()
         );
@@ -25,6 +26,7 @@ public class EvaluationMapper {
                 evaluationDto.getEvaluationId(),
                 evaluationDto.getEvaluationType(),
                 evaluationDto.isNeedComp(),
+                evaluationDto.getEvaluationWeight(),
                 evaluationDto.getSubject(),
                 evaluationDto.getClassroom()
         );

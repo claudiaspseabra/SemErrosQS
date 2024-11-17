@@ -9,7 +9,10 @@ import java.util.List;
 
 public interface EvaluationServices {
     EvaluationDto createEvaluation(EvaluationDto evaluationDto);
+
     EvaluationDto getEvaluationById(long id);
+
     EvaluationDto deleteEvaluationById(long id);
+
     List<EvaluationDto> getAllEvaluations();
 }

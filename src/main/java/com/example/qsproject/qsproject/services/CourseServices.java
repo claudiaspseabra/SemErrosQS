@@ -9,7 +9,10 @@ import java.util.List;
 
 public interface CourseServices {
     CourseDto createCourse(CourseDto courseDto);
+
     CourseDto getCourseById(long id);
+
     CourseDto deleteCourseById(long id);
+
     List<CourseDto> getAllCourses();
 }

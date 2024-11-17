@@ -29,10 +29,12 @@ public class Evaluation {
     @Column(name="needComp",nullable = false)
     private boolean needComp;
 
+    @Column(name="evaluationWeight",nullable = false)
+    private double evaluationWeight;
+
     @ManyToOne
     @JoinColumn(name= "subject_id",nullable = false)
     private Subject subject;
-
 
     @ManyToOne
     @JoinColumn(name = "classroom_id",nullable = false)
