@@ -1,4 +1,7 @@
-package com.example.qsproject.qsproject;
+package com.example.qsproject.qsproject.mappers;
+
+import com.example.qsproject.qsproject.User;
+import com.example.qsproject.qsproject.dtos.UsersDto;
 
 public class UserMapper {
 

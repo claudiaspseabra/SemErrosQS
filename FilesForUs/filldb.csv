@@ -1,0 +1,67 @@
+"NumeroSala","Designação","TipoDeMaterial","NumeroLugares"
+"Aula Magna","Auditório","Cadeiras",364
+"101","Sala de Aula","Anfiteatro",84
+"102","Sala de Aula","Anfiteatro",96
+"103","Sala de Aula","Anfiteatro",126
+"104","Sala de Aula","Anfiteatro",168
+"105","Sala de Aula","Anfiteatro",239
+"201","Auditório","Cadeiras",88
+"202","Sala de Aula","Anfiteatro",84
+"203","Sala de Aula","Anfiteatro",84
+"204","Sala de Aula","Anfiteatro",84
+"205","Sala de Aula","Mesas",60
+"206","Sala de Aula","Mesas",60
+"207","Sala de Aula","Mesas",60
+"208","Sala de Aula","Mesas",86
+"209","Sala de Aula","Mesas",60
+"210","Sala de Aula","Mesas",118
+"301","Sala de Aula","Mesas",104
+"302","Sala de Aula","Mesas",58
+"303","Sala de Aula","Mesas",58
+"304","Sala de Aula","Mesas",98
+"305","Sala de Aula","Mesas",94
+"306","Sala de Aula","Mesas",60
+"307","Sala de Aula","Mesas",60
+"308","Sala de Aula","Mesas",60
+"309","Sala de Aula","Mesas",90
+"310","Sala de Aula","Mesas",60
+"311","Sala de Aula","Mesas",58
+"313","Sala de Aula","Mesas",18
+"316","Sala de Aula","Mesas",108
+"317","Sala de Aula","Mesas",12
+"401","Sala de Aula","Mesas",28
+"402","Sala de Aula","Mesas",22
+"403","Laboratório","computadores",24
+"404","Laboratório","computadores",24
+"405","Sala de Estudo","Mesas",0
+"406","Sala de Estudo","Mesas",0
+"407","Sala de Estudo","Mesas",0
+"408","Laboratório","computadores",28
+"409","Sala de Estudo","Mesas",0
+"410","Laboratório","computadores",46
+"411","Laboratório","computadores",24
+"412","Laboratório","computadores",24
+"413","Laboratório","computadores",24
+"414","Laboratório","computadores",60
+"415","Laboratório","computadores",24
+"416","Laboratório","computadores",36
+"418","Sala de Aula","Mesas",12
+"419","Sala de Aula","Mesas",12
+"421","Sala de Aula","computadores",74
+"422","Laboratório","Mesas",18
+"509","Sala de Aula","Mesas",36
+"510","Sala de Aula","Mesas",38
+"511","Sala de Aula","Mesas",40
+"512","Sala de Aula","Mesas",30
+"751","Sala de Aula","Mesas",68
+"752","Sala de Aula","Mesas",90
+"753","Sala de Aula","Mesas",4
+"751/752","Sala de Aula","Mesas",158
+"754/755","Sala de Aula","Mesas",150
+"754","Sala de Aula","Mesas",82
+"755","Sala de Aula","Mesas",68
+"756","Sala de Aula","Mesas",26
+"757","Sala de Aula","Mesas",14
+"758","Sala de Aula","Mesas",20
+"759","Sala de Aula","Mesas",20
+"760","Sala de Aula","Mesas",20
