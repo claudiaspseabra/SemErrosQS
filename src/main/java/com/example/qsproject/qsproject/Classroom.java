@@ -22,22 +22,27 @@ public class Classroom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long classroomId;
 
+    @Column(name = "classroomTag",nullable = false)
+    private String classroomTag;
+
+    @Column(name = "description",nullable = false)
+    private String description;
+
     @Column(name = "capacity",nullable = false)
     private int capacity;
 
-    @Column(name = "computers",nullable = false)
-    private boolean computers;
+//    @Column(name = "computers",nullable = false)
+//    private boolean computers;
 
-    @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "listEvaluations", cascade = CascadeType.ALL)
     private List<Evaluation> evaluations;
+
+
+    @Column(name = "classroomType",nullable = false)
+    private String classroomType;
 
     @Column(name = "classroomInUseDate",nullable = true)
     private Date classroomInUseDate;
 
-    /*
-        @Column(name = "classroomType",nullable = false)
-    private String classroomType;
-
-     */
 
 }
