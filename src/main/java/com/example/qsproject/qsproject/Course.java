@@ -31,7 +31,7 @@ public class Course {
     private int years;
 */
 
-    @Column(name = "subjects")
     @OneToMany(mappedBy = "courses" , cascade = CascadeType.ALL)
     private List<Subject> subjects;
+
 }
