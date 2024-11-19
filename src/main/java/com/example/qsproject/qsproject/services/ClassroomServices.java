@@ -4,7 +4,7 @@ import com.example.qsproject.qsproject.dtos.ClassroomDto;
 
 import java.util.List;
 
-public interface ClassRoomServices {
+public interface ClassroomServices {
     ClassroomDto createClassroom(ClassroomDto classroomDto);
     ClassroomDto getClassroomById(long id);
     ClassroomDto deleteClassroomById(long id);
