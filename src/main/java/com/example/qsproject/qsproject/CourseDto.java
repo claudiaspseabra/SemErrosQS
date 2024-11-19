@@ -12,19 +12,10 @@ import java.util.ArrayList;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CourseDto {
-    private int id;
-    private String name;
-    private String subjects;
+    private int CourseId;
+    private String CourseName;
+    private ArrayList<Subject> subjects;
 
-    public int getId() {
-        return id;
-    }
 
-    public String getName() {
-        return name;
-    }
 
-    public String getSubjects() {
-        return subjects;
-    }
 }
