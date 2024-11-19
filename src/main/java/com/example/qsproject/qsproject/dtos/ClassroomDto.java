@@ -16,10 +16,11 @@ import java.util.List;
 @AllArgsConstructor
 public class ClassroomDto {
     private long classroomId;
+    private String tag;
+    private String description;
+    private String classroomType;
     private int capacity;
-    private boolean computers;
     private List<Evaluation> evaluations;
     private Date classroomInUseDate;
 
 }
-

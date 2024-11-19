@@ -8,8 +8,10 @@ public class ClassroomMapper {
     public static ClassroomDto mapToClassroomDto(Classroom classroom) {
         return new ClassroomDto(
                 classroom.getClassroomId(),
+                classroom.getTag(),
+                classroom.getDescription(),
+                classroom.getClassroomType(),
                 classroom.getCapacity(),
-                classroom.isComputers(),
                 classroom.getEvaluations(),
                 classroom.getClassroomInUseDate()
         );
@@ -18,8 +20,10 @@ public class ClassroomMapper {
     public static Classroom mapToClassroom(ClassroomDto classroomDto){
         return new Classroom(
                 classroomDto.getClassroomId(),
+                classroomDto.getTag(),
+                classroomDto.getDescription(),
+                classroomDto.getClassroomType(),
                 classroomDto.getCapacity(),
-                classroomDto.isComputers(),
                 classroomDto.getEvaluations(),
                 classroomDto.getClassroomInUseDate()
         );
