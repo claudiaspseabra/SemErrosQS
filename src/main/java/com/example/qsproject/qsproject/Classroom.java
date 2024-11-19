@@ -17,10 +17,12 @@ import java.util.List;
 //TESTE
 @Entity
 @Table(name = "classrooms")
-public class Classroom {
+public classlassroom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long classroomId;
+
+
 
     @Column(name = "capacity",nullable = false)
     private int capacity;
