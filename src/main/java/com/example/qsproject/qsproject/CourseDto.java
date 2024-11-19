@@ -12,7 +12,7 @@ import java.util.ArrayList;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CourseDto {
-    private int CourseId;
+    private long CourseId;
     private String CourseName;
     private ArrayList<Subject> subjects;
 
