@@ -26,7 +26,4 @@ public class Course {
 
     @Column(name = "subjects")
     private ArrayList<Subject> subjects;
-
-
-
 }
