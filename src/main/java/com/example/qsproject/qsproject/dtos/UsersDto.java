@@ -1,4 +1,4 @@
-package com.example.qsproject.qsproject;
+package com.example.qsproject.qsproject.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
