@@ -17,7 +17,7 @@ import java.util.List;
 //TESTE
 @Entity
 @Table(name = "classrooms")
-public classlassroom {
+public class Classroom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long classroomId;
