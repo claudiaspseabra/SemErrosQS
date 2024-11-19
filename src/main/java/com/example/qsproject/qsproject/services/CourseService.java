@@ -1,4 +1,6 @@
-package com.example.qsproject.qsproject;
+package com.example.qsproject.qsproject.services;
+
+import com.example.qsproject.qsproject.dtos.CourseDto;
 
 // Interface com os métodos que terao de ser utilizados no UserServiceImpl
 public interface CourseService {
