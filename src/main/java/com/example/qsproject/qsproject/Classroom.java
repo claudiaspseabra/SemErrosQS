@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 // test
@@ -35,7 +36,7 @@ public class Classroom {
     private int capacity;
 
     @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
-    private List<Evaluation> evaluations;
+    private ArrayList<Evaluation> evaluations;
 
     @Column(name = "classroomInUseDate",nullable = true)
     private Date classroomInUseDate;

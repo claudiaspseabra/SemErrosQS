@@ -22,7 +22,7 @@ public class CourseImpl implements CourseService {
 
 
     @Override
-    public CourseDto getCourseById(int id) {
+    public CourseDto getCourseById(long id) {
         Course course = courseRepository.findById(id)
                 .orElseThrow(()-> new Exceptions("Admin not found with this id: "+id));
         return CourseMapper.mapToCourseDto(course);
@@ -31,7 +31,7 @@ public class CourseImpl implements CourseService {
 
     // 05/11
     @Override
-    public CourseDto deleteCourseById(int id){
+    public CourseDto deleteCourseById(long id){
         Course course = courseRepository.findById(id).orElseThrow(()-> new Exceptions("Couldnt remove admin with this id: "+id));
         courseRepository.delete(course);
         return CourseMapper.mapToCourseDto(course);
