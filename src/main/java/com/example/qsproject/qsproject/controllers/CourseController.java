@@ -1,11 +1,15 @@
 package com.example.qsproject.qsproject.controllers;
 
 import com.example.qsproject.qsproject.dtos.CourseDto;
+import com.example.qsproject.qsproject.dtos.UsersDto;
 import com.example.qsproject.qsproject.services.CourseService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @RestController
@@ -32,4 +36,12 @@ public class CourseController {
         CourseDto deletedCourseDto = courseService.deleteCourseById(id);
         return new ResponseEntity<>(deletedCourseDto, HttpStatus.OK);
     }
+
+
+    @GetMapping()
+    public ResponseEntity<ArrayList<CourseDto>> getAllCourses(){
+        ArrayList<CourseDto> courses = courseService.getAllCourses();
+        return ResponseEntity.ok(courses);
+    }
+
 }

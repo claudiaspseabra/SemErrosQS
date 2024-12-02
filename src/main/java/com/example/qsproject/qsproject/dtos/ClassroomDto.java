@@ -1,6 +1,7 @@
 package com.example.qsproject.qsproject.dtos;
 
 import com.example.qsproject.qsproject.Evaluation;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,6 +27,9 @@ public class ClassroomDto {
     private String classroomType;
     private int capacity;
     //@OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
-    private ArrayList<Evaluation> evaluations;
+    //@JsonManagedReference
+//    private ArrayList<Evaluation> evaluations;
+//    @JsonManagedReference  // Evita referências circulares no JSON
+//    private List<Evaluation> evaluations;
     private Date classroomInUseDate;
 }

@@ -1,5 +1,6 @@
 package com.example.qsproject.qsproject.controllers;
 
+import com.example.qsproject.qsproject.dtos.CourseDto;
 import com.example.qsproject.qsproject.dtos.SemesterDto;
 import com.example.qsproject.qsproject.repositories.SemesterRepository;
 import com.example.qsproject.qsproject.services.SemesterService;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 
 
 @AllArgsConstructor
@@ -38,5 +40,12 @@ public class SemesterController {
         SemesterDto deleteSemesterDto = semesterService.deleteSemesterById(id);
         return new ResponseEntity<>(deleteSemesterDto, HttpStatus.OK);
     }
+
+    @GetMapping()
+    public ResponseEntity<ArrayList<SemesterDto>> getAllSemester(){
+        ArrayList<SemesterDto> semesters = semesterService.getAllSemesters();
+        return ResponseEntity.ok(semesters);
+    }
+
 
 }
