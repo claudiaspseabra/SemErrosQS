@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 // test
@@ -23,22 +22,22 @@ public class Classroom {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long classroomId;
 
-    @Column(name = "tag",nullable = false,unique = true)
-    private String tag;
-
-    @Column(name = "description",nullable = false)
-    private String description;
-
-    @Column(name = "classroomType",nullable = false)
-    private String classroomType;
-
     @Column(name = "capacity",nullable = false)
     private int capacity;
 
+    @Column(name = "computers",nullable = false)
+    private boolean computers;
+
     @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
-    private ArrayList<Evaluation> evaluations;
+    private List<Evaluation> evaluations;
 
     @Column(name = "classroomInUseDate",nullable = true)
     private Date classroomInUseDate;
+
+    /*
+        @Column(name = "classroomType",nullable = false)
+    private String classroomType;
+
+     */
 
 }

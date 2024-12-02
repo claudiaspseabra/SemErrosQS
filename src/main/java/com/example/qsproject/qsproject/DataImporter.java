@@ -1,6 +1,5 @@
 package com.example.qsproject.qsproject;
 
-import com.example.qsproject.qsproject.services.ClassroomServices;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,12 +8,11 @@ import org.springframework.stereotype.Component;
 public class DataImporter {
 
     @Autowired
-    private ClassroomServices classroomServices;
+    private ClassroomService classroomService;
 
     @PostConstruct
     public void runImport() {
         String csvFilePath = "./FilesForUs/filldb.csv";
-        //String csvFilePath = "FilesForUs\\filldb.csv";
-        classroomServices.importCSV(csvFilePath);
+        classroomService.importCSV(csvFilePath);
     }
 }
