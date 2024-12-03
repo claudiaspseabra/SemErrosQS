@@ -25,7 +25,7 @@ public class ClassroomMapper {
                     classroomDto.getDescription(),
                     classroomDto.getClassroomType(),
                     classroomDto.getCapacity(),
-//                    classroomDto.getEvaluations(),
+//                  classroomDto.getEvaluations(),
                     classroomDto.getClassroomInUseDate()
             );
         }

@@ -17,7 +17,9 @@ public class SubjectMapper {
                 subject.getSubjectName(),
                 subject.getCourses(),
                 subject.getEvaluations(),
-                subject.getStudentsEnrolled()
+                subject.getStudentsEnrolled(),
+                subject.getSubjectEvaluationType()
+
         );
     }
 
@@ -27,7 +29,8 @@ public class SubjectMapper {
                 subjectDto.getSubjectName(),
                 subjectDto.getCourses(),
                 subjectDto.getEvaluations(),
-                subjectDto.getStudentsEnrolled()
+                subjectDto.getStudentsEnrolled(),
+                subjectDto.getSubjectEvaluationType()
         );
     }
 }

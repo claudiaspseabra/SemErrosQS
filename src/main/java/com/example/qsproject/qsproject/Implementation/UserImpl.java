@@ -7,7 +7,6 @@ import com.example.qsproject.qsproject.mappers.UserMapper;
 import com.example.qsproject.qsproject.repositories.UsersRespository;
 import com.example.qsproject.qsproject.services.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class UserServiceImpl implements UserService {
+public class UserImpl implements UserService {
     private UsersRespository usersRespository;
 
     @Override
