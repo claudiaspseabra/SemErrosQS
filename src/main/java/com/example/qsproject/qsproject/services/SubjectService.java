@@ -5,7 +5,7 @@ import com.example.qsproject.qsproject.dtos.SubjectDto;
 import java.util.List;
 
 
-public interface SubjectServices {
+public interface SubjectService {
 
     SubjectDto createSubject(SubjectDto subjectDto);
 

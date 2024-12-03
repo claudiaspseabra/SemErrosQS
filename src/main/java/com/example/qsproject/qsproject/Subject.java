@@ -36,4 +36,7 @@ public class Subject {
 
     @Column(name = "studentsEnrolled",nullable = false)
     private int studentsEnrolled;
+
+    @Column(name = "subjectEvaluationType",nullable = false)
+    private String subjectEvaluationType;
 }

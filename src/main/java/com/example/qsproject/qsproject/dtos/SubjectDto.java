@@ -14,10 +14,12 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SubjectDto {
+
     private long subjectId;
     private String subjectName;
     private Course courses;
     private List<Evaluation> evaluations;
     private int studentsEnrolled;
+    private String subjectEvaluationType;
 }
 
