@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 @Getter
 @Setter
@@ -28,6 +29,15 @@ public class User {
 
     @Column(name = "username",nullable = false , unique = true)
     private String username;
+
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Collection<Role> roles = new HashSet<>();
 
     // new
     /*
