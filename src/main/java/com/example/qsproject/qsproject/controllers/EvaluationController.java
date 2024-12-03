@@ -23,10 +23,10 @@ public class EvaluationController {
 
     @PostMapping
     public ResponseEntity<EvaluationDto> createEvaluation(@RequestBody EvaluationDto evaluationDto) {
-        EvaluationDto savedEvaluationsDto = evaluationServices.createEvaluation(evaluationDto);
-        return new ResponseEntity<>(savedEvaluationsDto, HttpStatus.CREATED);
+        // Call service to create evaluation
+        EvaluationDto savedEvaluationDto = evaluationServices.createEvaluation(evaluationDto);
+        return new ResponseEntity<>(savedEvaluationDto, HttpStatus.CREATED);
     }
-
 
     @GetMapping("{id}")
     public ResponseEntity<EvaluationDto> getEvaluationById(@PathVariable("id") long id) {
