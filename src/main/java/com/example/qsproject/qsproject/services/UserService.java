@@ -11,7 +11,6 @@ public interface UserService {
 
     UsersDto getUserById(int id);
 
-    //05/11
     UsersDto deleteUserById(int id);
 
     List<UsersDto> getAllUsers();

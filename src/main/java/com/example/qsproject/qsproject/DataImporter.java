@@ -13,8 +13,7 @@ public class DataImporter {
 
     @PostConstruct
     public void runImport() {
-       // String csvFilePath = "./FilesForUs/filldb.csv";
-        String csvFilePath = "FilesForUs\\filldb.csv";
+        String csvFilePath = "./FilesForUs/filldb.csv";
         classroomServices.importCSV(csvFilePath);
     }
 }
