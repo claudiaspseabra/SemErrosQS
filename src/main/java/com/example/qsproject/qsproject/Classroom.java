@@ -18,6 +18,8 @@ import java.util.List;
 @Table(name = "classrooms")
 public class Classroom {
 
+    //classe classroom
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long classroomId;
