@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,20 +17,13 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 @Table(name = "classrooms")
 public class ClassroomDto {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long classroomId;
     private String tag;
     private String description;
     private String classroomType;
     private int capacity;
-    //@OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
-    //@JsonManagedReference
-//    private ArrayList<Evaluation> evaluations;
-//    @JsonManagedReference  // Evita referências circulares no JSON
-//    private List<Evaluation> evaluations;
-    private Date classroomInUseDate;
+    private List<Long> evaluationIds; // Simplified representation of evaluations
+    private LocalDate classroomInUseDate; // Updated from java.sql.Date to java.time.LocalDate
 }

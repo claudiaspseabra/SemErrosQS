@@ -7,16 +7,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-// test
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-//TESTE
 @Entity
 @Table(name = "classrooms")
 public class Classroom {
@@ -39,10 +36,8 @@ public class Classroom {
     @Column(name = "capacity", nullable = false)
     private int capacity;
 
-//    @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL)
-//    @JsonBackReference  // Evita referências circulares no JSON
-//    private List<Evaluation> evaluations;  // Lista de avaliações associadas à sala
-
-    @Column(name = "classroomInUseDate", nullable = true)
-    private Date classroomInUseDate;
+    // Bidirectional mapping to Evaluation
+    @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonBackReference // Avoid circular references in serialization
+    private List<Evaluation> evaluations = new ArrayList<>();
 }

@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,8 +17,8 @@ import lombok.Setter;
 public class EvaluationDto {
     private long evaluationId;
     private String evaluationType;
-    private boolean needComp;
     private double evaluationWeight;
-    private Subject subject;
-    private Classroom classroom;
+    private LocalDate evaluationDate;
+    private long subjectId; // Lightweight representation of Subject
+    private long classroomId; // Lightweight representation of Classroom
 }
