@@ -21,5 +21,6 @@ public class SubjectDto {
     private List<Evaluation> evaluations;
     private int studentsEnrolled;
     private String subjectEvaluationType;
+    private String subjectAttendance;
 }
 
