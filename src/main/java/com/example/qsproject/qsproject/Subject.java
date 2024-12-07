@@ -39,4 +39,8 @@ public class Subject {
 
     @Column(name = "subjectEvaluationType",nullable = false)
     private String subjectEvaluationType;
+
+    @Column(name = "subjectAttendance", nullable = false)
+    private String subjectAttendance;
+    // falta assiduidade
 }

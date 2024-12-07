@@ -19,7 +19,7 @@ import java.util.List;
 // to do
 @AllArgsConstructor
 @RestController
-@RequestMapping("/app/users")
+@RequestMapping("/app/subjects")
 
 public class SubjectController {
 
@@ -64,6 +64,7 @@ public class SubjectController {
         subjectUpdate.setSubjectName(subjectUpdate.getSubjectName());
         subjectUpdate.setSubjectEvaluationType(subjectUpdate.getSubjectEvaluationType());
         subjectUpdate.setStudentsEnrolled(subjectUpdate.getStudentsEnrolled());
+        subjectUpdate.setSubjectAttendance(subjectUpdate.getSubjectAttendance());
 
         return ResponseEntity.ok(subjectDto);
     }
