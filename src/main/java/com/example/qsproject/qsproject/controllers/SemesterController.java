@@ -47,5 +47,10 @@ public class SemesterController {
         return ResponseEntity.ok(semesters);
     }
 
+    @PutMapping("{id}")
+    public ResponseEntity<SemesterDto> updateSemester(@PathVariable("id") long semesterId,@RequestBody SemesterDto updatedSemester){
+        SemesterDto semesterDto = semesterService.updateSemester(semesterId,updatedSemester);
+        return ResponseEntity.ok(semesterDto);
+    }
 
 }

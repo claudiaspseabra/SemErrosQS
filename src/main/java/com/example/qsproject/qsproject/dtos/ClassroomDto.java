@@ -25,5 +25,5 @@ public class ClassroomDto {
     private String classroomType;
     private int capacity;
     private List<Long> evaluationIds; // Simplified representation of evaluations
-    private LocalDate classroomInUseDate; // Updated from java.sql.Date to java.time.LocalDate
+    //private LocalDate classroomInUseDate; // Updated from java.sql.Date to java.time.LocalDate
 }

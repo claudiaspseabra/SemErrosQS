@@ -14,5 +14,5 @@ public interface CourseService {
 
     CourseDto deleteCourseById(long id);
 
-    ArrayList<CourseDto> getAllCourses();
+    List<CourseDto> getAllCourses();
 }

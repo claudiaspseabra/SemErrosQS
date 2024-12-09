@@ -1,4 +1,5 @@
-package com.example.qsproject.qsproject.services.impl;
+package com.example.qsproject.qsproject.Implementation;
+
 
 import com.example.qsproject.qsproject.Classroom;
 import com.example.qsproject.qsproject.Evaluation;
@@ -37,7 +38,9 @@ public class EvaluationImpl implements EvaluationServices {
                 .orElseThrow(() -> new RuntimeException("Classroom not found"));
 
         // Convert EvaluationDto to Evaluation entity with the actual Subject and Classroom entities
-        Evaluation evaluation = EvaluationMapper.mapToEvaluation(evaluationDto, subject, classroom);
+        evaluationDto.setSubjectId(subject.getSubjectId());
+        evaluationDto.setClassroomId(classroom.getClassroomId());
+        Evaluation evaluation = EvaluationMapper.mapToEvaluation(evaluationDto);
 
         // Save the Evaluation entity
         evaluation = evaluationRepository.save(evaluation);

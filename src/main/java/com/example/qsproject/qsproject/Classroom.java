@@ -38,6 +38,6 @@ public class Classroom {
 
     // Bidirectional mapping to Evaluation
     @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonBackReference // Avoid circular references in serialization
+    //@JsonBackReference // Avoid circular references in serialization
     private List<Evaluation> evaluations = new ArrayList<>();
 }

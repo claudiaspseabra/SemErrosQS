@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -14,6 +15,6 @@ import java.util.ArrayList;
 @AllArgsConstructor
 public class CourseDto {
     private long CourseId;
-    private String CourseName;
-    private ArrayList<Subject> subjects;
+    private String courseName;
+    private List<SubjectDto> subjects;
 }
