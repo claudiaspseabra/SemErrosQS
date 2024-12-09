@@ -18,6 +18,6 @@ public interface CourseService {
 
     List<CourseDto> getAllCourses();
 
-    CourseDto updateCourse(long evaluationId, SubjectDto updateEvaluation);
+    CourseDto updateCourse(long courseId, CourseDto updateCourse);
 
 }
