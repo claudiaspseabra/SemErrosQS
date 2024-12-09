@@ -1,8 +1,10 @@
 package com.example.qsproject.qsproject.Implementation;
 
 import com.example.qsproject.qsproject.*;
+import com.example.qsproject.qsproject.dtos.ClassroomDto;
 import com.example.qsproject.qsproject.dtos.CourseDto;
 import com.example.qsproject.qsproject.dtos.UsersDto;
+import com.example.qsproject.qsproject.mappers.ClassroomMapper;
 import com.example.qsproject.qsproject.mappers.CourseMapper;
 import com.example.qsproject.qsproject.mappers.UserMapper;
 import com.example.qsproject.qsproject.repositories.CourseRepository;
@@ -48,6 +50,20 @@ public class CourseImpl implements CourseService {
         return courses.stream()
                 .map(course -> CourseMapper.mapToCourseDto(course))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public CourseDto updateCourse(long courseId, CourseDto updatedCourse) {
+        Course course = courseRepository.findById(courseId).orElseThrow(
+                () -> new Exceptions("User does not exist with this id: " + courseId)
+        );
+
+        course.setCourseName(updatedCourse.getCourseName());
+       // course.setSubjects(updatedCourse.getSubjects());
+
+        Course updateCourseObj = courseRepository.save(course);
+
+        return CourseMapper.mapToCourseDto(updateCourseObj);
     }
 
 }

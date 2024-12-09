@@ -1,11 +1,13 @@
 package com.example.qsproject.qsproject.Implementation;
 
 
-import com.example.qsproject.qsproject.Classroom;
-import com.example.qsproject.qsproject.Evaluation;
-import com.example.qsproject.qsproject.Subject;
+import com.example.qsproject.qsproject.*;
+import com.example.qsproject.qsproject.dtos.CourseDto;
 import com.example.qsproject.qsproject.dtos.EvaluationDto;
+import com.example.qsproject.qsproject.dtos.SubjectDto;
+import com.example.qsproject.qsproject.mappers.CourseMapper;
 import com.example.qsproject.qsproject.mappers.EvaluationMapper;
+import com.example.qsproject.qsproject.mappers.SubjectMapper;
 import com.example.qsproject.qsproject.repositories.ClassroomRepository;
 import com.example.qsproject.qsproject.repositories.SubjectRepository;
 import com.example.qsproject.qsproject.repositories.EvaluationRepository;
@@ -79,4 +81,19 @@ public class EvaluationImpl implements EvaluationServices {
                 .map(EvaluationMapper::mapToEvaluationDto)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public EvaluationDto updateEvaluations(long evaluationId, Evaluation updateEvalution) {
+        Evaluation evaluation = evaluationRepository.findById(evaluationId).orElseThrow(
+                () -> new Exceptions("User does not exist with this id: " + evaluationId)
+        );
+
+        evaluation.setEvaluationType(updateEvalution.getEvaluationType());
+        //    evaluation.setEvaluationWeight(updateEvaluation.get());
+
+        Evaluation updateEvaluationObj = evaluationRepository.save(evaluation);
+
+        return EvaluationMapper.mapToEvaluationDto(updateEvaluationObj);
+    }
+
 }

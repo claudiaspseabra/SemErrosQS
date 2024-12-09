@@ -3,10 +3,13 @@ package com.example.qsproject.qsproject.Implementation;
 import com.example.qsproject.qsproject.Classroom;
 import com.example.qsproject.qsproject.Course;
 import com.example.qsproject.qsproject.Exceptions;
+import com.example.qsproject.qsproject.User;
 import com.example.qsproject.qsproject.dtos.ClassroomDto;
 import com.example.qsproject.qsproject.dtos.CourseDto;
+import com.example.qsproject.qsproject.dtos.UsersDto;
 import com.example.qsproject.qsproject.mappers.ClassroomMapper;
 import com.example.qsproject.qsproject.mappers.CourseMapper;
+import com.example.qsproject.qsproject.mappers.UserMapper;
 import com.example.qsproject.qsproject.repositories.ClassroomRepository;
 import com.example.qsproject.qsproject.services.ClassroomServices;
 import com.opencsv.CSVReader;
@@ -64,7 +67,7 @@ public class ClassroomImpl {
         @Override
         public ClassroomDto getClassroomById(long id) {
             Classroom classroom = classroomRepository.findById(id)
-                    .orElseThrow(()-> new Exceptions("Classroom not found with this id: "+id));
+                    .orElseThrow(() -> new Exceptions("Classroom not found with this id: " + id));
             return ClassroomMapper.mapToClassroomDto(classroom);
         }
 
@@ -76,7 +79,23 @@ public class ClassroomImpl {
                     .collect(Collectors.toList());
         }
 
+        @Override
+        public ClassroomDto updateClassroom(long classroomId, ClassroomDto updatedClassroom) {
+            Classroom classroom = classroomRepository.findById(classroomId).orElseThrow(
+                    () -> new Exceptions("User does not exist with this id: " + classroomId)
+            );
+
+            classroom.setCapacity(updatedClassroom.getCapacity());
+            classroom.setTag(updatedClassroom.getTag());
+            classroom.setDescription(updatedClassroom.getDescription());
+            classroom.setClassroomType(updatedClassroom.getClassroomType());
+
+            Classroom updateClassroomObj = classroomRepository.save(classroom);
+
+            return ClassroomMapper.mapToClassroomDto(updateClassroomObj);
+        }
 
     }
+
 
 }

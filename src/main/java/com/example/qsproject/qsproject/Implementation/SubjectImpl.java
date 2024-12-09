@@ -1,26 +1,15 @@
 package com.example.qsproject.qsproject.Implementation;
 
-import com.example.qsproject.qsproject.Exceptions;
-import com.example.qsproject.qsproject.Semester;
-import com.example.qsproject.qsproject.Subject;
-import com.example.qsproject.qsproject.User;
-import com.example.qsproject.qsproject.dtos.SemesterDto;
+import com.example.qsproject.qsproject.*;
+import com.example.qsproject.qsproject.dtos.CourseDto;
 import com.example.qsproject.qsproject.dtos.SubjectDto;
-import com.example.qsproject.qsproject.dtos.UsersDto;
-import com.example.qsproject.qsproject.mappers.SemesterMapper;
 import com.example.qsproject.qsproject.mappers.SubjectMapper;
-import com.example.qsproject.qsproject.mappers.UserMapper;
 import com.example.qsproject.qsproject.repositories.SubjectRepository;
-import com.example.qsproject.qsproject.repositories.UsersRespository;
 import com.example.qsproject.qsproject.services.SubjectService;
-import com.example.qsproject.qsproject.services.UserService;
 import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 
@@ -74,4 +63,27 @@ public class SubjectImpl implements SubjectService {
 
         return SubjectMapper.mapToSubjectDto(updatedSubjectObj);
     }
+
+    @Override
+    public SubjectDto updateSubject(long subjectId, SubjectDto updateSubject) {
+        Subject subject = subjectRepository.findById(subjectId).orElseThrow(
+                () -> new Exceptions("User does not exist with this id: " + subjectId)
+        );
+
+        subject.setCourses(updateSubject.getCourses());
+        subject.setSubjectName(updateSubject.getSubjectName());
+        subject.setSubjectAttendance(updateSubject.getSubjectAttendance());
+        //subject.setEvaluations(updateSubject.getEvaluations());
+
+        subject.setStudentsEnrolled(updateSubject.getStudentsEnrolled());
+        subject.setSubjectEvaluationType(updateSubject.getSubjectEvaluationType());
+
+
+
+
+        Subject updateSubjectObj = subjectRepository.save(subject);
+
+        return SubjectMapper.mapToSubjectDto(updateSubjectObj);
+    }
+
 }

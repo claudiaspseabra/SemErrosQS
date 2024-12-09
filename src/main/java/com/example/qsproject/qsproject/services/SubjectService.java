@@ -1,5 +1,6 @@
 package com.example.qsproject.qsproject.services;
 
+import com.example.qsproject.qsproject.dtos.CourseDto;
 import com.example.qsproject.qsproject.dtos.SubjectDto;
 import com.example.qsproject.qsproject.dtos.UsersDto;
 
@@ -17,4 +18,6 @@ public interface SubjectService {
     List<SubjectDto> getAllSubjects();
 
     SubjectDto updateSubject(Long subjectId, SubjectDto updatedSubject);
+
+    SubjectDto updateSubject(long subjectId, SubjectDto updateSubject);
 }

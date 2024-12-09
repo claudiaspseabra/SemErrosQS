@@ -1,6 +1,7 @@
 package com.example.qsproject.qsproject.services;
 
 import com.example.qsproject.qsproject.Evaluation;
+import com.example.qsproject.qsproject.dtos.CourseDto;
 import com.example.qsproject.qsproject.dtos.EvaluationDto;
 
 import java.util.List;
@@ -17,4 +18,6 @@ public interface EvaluationServices {
 
     // Get all Evaluations
     List<EvaluationDto> getAllEvaluations();
+
+    EvaluationDto updateEvaluations(long evaluationId, Evaluation updateEvalution);
 }

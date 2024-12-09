@@ -66,5 +66,4 @@ public class UserImpl implements UserService {
 
         return UserMapper.mapToUserDto(updatedUserObj);
     }
-
 }
