@@ -58,4 +58,20 @@ public class SubjectImpl implements SubjectService {
         return subjects.stream().map((subject)->SubjectMapper.mapToSubjectDto(subject))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public SubjectDto updateSubject(Long subjectId, SubjectDto updatedSubject) {
+        Subject subject = subjectRepository.findById(subjectId).orElseThrow(
+                () -> new Exceptions("Subject does not exist with this id: "+subjectId)
+        );
+
+        subject.setSubjectName(updatedSubject.getSubjectName());
+        subject.setStudentsEnrolled(updatedSubject.getStudentsEnrolled());
+        subject.setSubjectEvaluationType(updatedSubject.getSubjectEvaluationType());
+        subject.setSubjectAttendance(updatedSubject.getSubjectAttendance());
+
+        Subject updatedSubjectObj = subjectRepository.save(subject);
+
+        return SubjectMapper.mapToSubjectDto(updatedSubjectObj);
+    }
 }

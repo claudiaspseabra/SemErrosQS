@@ -1,5 +1,6 @@
 package com.example.qsproject.qsproject;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -34,12 +35,12 @@ public class Evaluation {
 
     @JoinColumn(name = "subject_id")
     @ManyToOne(optional = true)
+    //@JsonBackReference // added this
     private Subject subject;
-
 
     @ManyToOne
     @JoinColumn(name = "classroom_id", nullable = false) // Foreign key column
-    @JsonManagedReference // Handles the other side of the bidirectional relationship
+    //@JsonManagedReference // Handles the other side of the bidirectional relationship
     private Classroom classroom;
 }
 

@@ -30,7 +30,7 @@ public class CourseController {
         return ResponseEntity.ok(courseDto);
     }
 
-    // 05/11
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<CourseDto> deleteCourseById(@PathVariable("id") int id) {
         CourseDto deletedCourseDto = courseService.deleteCourseById(id);
@@ -39,8 +39,8 @@ public class CourseController {
 
 
     @GetMapping()
-    public ResponseEntity<ArrayList<CourseDto>> getAllCourses(){
-        ArrayList<CourseDto> courses = courseService.getAllCourses();
+    public ResponseEntity<List<CourseDto>> getAllCourses(){
+        List<CourseDto> courses = courseService.getAllCourses();
         return ResponseEntity.ok(courses);
     }
 

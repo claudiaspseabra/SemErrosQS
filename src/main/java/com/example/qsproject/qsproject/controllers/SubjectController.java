@@ -1,8 +1,12 @@
 package com.example.qsproject.qsproject.controllers;
 
+import com.example.qsproject.qsproject.Course;
 import com.example.qsproject.qsproject.Exceptions;
 import com.example.qsproject.qsproject.Subject;
+import com.example.qsproject.qsproject.dtos.SemesterDto;
 import com.example.qsproject.qsproject.dtos.SubjectDto;
+import com.example.qsproject.qsproject.mappers.SubjectMapper;
+import com.example.qsproject.qsproject.repositories.CourseRepository;
 import com.example.qsproject.qsproject.repositories.SubjectRepository;
 import com.example.qsproject.qsproject.services.SubjectService;
 import com.example.qsproject.qsproject.services.UserService;
@@ -24,6 +28,7 @@ import java.util.List;
 public class SubjectController {
 
     private SubjectService subjectService;
+    private CourseRepository courseRepository;
     private SubjectRepository subjectespository;
 
     @PostMapping
@@ -31,6 +36,27 @@ public class SubjectController {
         SubjectDto savedSubjectDto = subjectService.createSubject(subjectDto);
         return new ResponseEntity<>(savedSubjectDto, HttpStatus.CREATED);
     }
+
+//    @PostMapping
+//    public ResponseEntity<SubjectDto> createSubject(@RequestBody SubjectDto subjectDto) {
+//        // Encontra o curso pelo ID
+//        Course course = courseRepository.findById(subjectDto.getCourses().getCourseId())
+//                .orElseThrow(() -> new RuntimeException("Course not found"));
+//
+//        // Cria o Subject
+//        Subject subject = new Subject();
+//        subject.setSubjectName(subjectDto.getSubjectName());
+//        subject.setStudentsEnrolled(subjectDto.getStudentsEnrolled());
+//        subject.setSubjectEvaluationType(subjectDto.getSubjectEvaluationType());
+//        subject.setSubjectAttendance(subjectDto.getSubjectAttendance());
+//        subject.setCourses(course);  // Associa o Subject ao Course
+//
+//        // Salva o Subject no banco
+//        subjectespository.save(subject);
+//
+//        return new ResponseEntity<>(SubjectMapper.mapToSubjectDto(subject), HttpStatus.CREATED);
+//    }
+
 
     @GetMapping("{id}")
     public ResponseEntity<SubjectDto> getSubjectById(@PathVariable("id") int id) {
@@ -53,19 +79,10 @@ public class SubjectController {
     }
 
 
-
-    @PutMapping("/update/{id}")
-    public ResponseEntity<SubjectDto> updateUSubject(@PathVariable int id, @RequestBody SubjectDto subjectDto) {
-
-
-        Subject subjectUpdate = subjectespository.findById((long) id).orElseThrow(()-> new Exceptions("Couldnt update this subject."));
-
-
-        subjectUpdate.setSubjectName(subjectUpdate.getSubjectName());
-        subjectUpdate.setSubjectEvaluationType(subjectUpdate.getSubjectEvaluationType());
-        subjectUpdate.setStudentsEnrolled(subjectUpdate.getStudentsEnrolled());
-        subjectUpdate.setSubjectAttendance(subjectUpdate.getSubjectAttendance());
-
+    @PutMapping("{id}")
+    public ResponseEntity<SubjectDto> updateSubject(@PathVariable("id") long subjectId,@RequestBody SubjectDto updatedSubject){
+        SubjectDto subjectDto = subjectService.updateSubject(subjectId,updatedSubject);
         return ResponseEntity.ok(subjectDto);
     }
+
 }

@@ -1,5 +1,7 @@
 package com.example.qsproject.qsproject;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,6 +27,8 @@ public class Course {
     @Column(name = "courseName",unique = true,nullable = false)
     private String courseName;
 
-    @Column(name = "subjects")
-    private ArrayList<Subject> subjects;
+
+    @OneToMany(mappedBy = "courses", cascade = CascadeType.ALL, orphanRemoval = true)
+    //@JsonManagedReference // added this
+    private List<Subject> subjects;
 }
