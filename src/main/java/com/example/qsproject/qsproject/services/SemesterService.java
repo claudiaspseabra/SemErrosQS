@@ -13,4 +13,6 @@ public interface SemesterService {
     SemesterDto deleteSemesterById(long id);
 
     ArrayList<SemesterDto> getAllSemesters();
+
+    SemesterDto updateSemester(Long semesterId, SemesterDto updatedSemester);
 }

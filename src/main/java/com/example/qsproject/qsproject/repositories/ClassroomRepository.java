@@ -5,6 +5,5 @@ import com.example.qsproject.qsproject.dtos.ClassroomDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ClassroomRepository extends JpaRepository<Classroom,Long> {
-//    @Override
-//    <S extends Classroom> S save(S entity);
+    boolean existsByTag(String tag);
 }

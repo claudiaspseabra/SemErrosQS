@@ -48,11 +48,26 @@ public class SemesterImpl implements SemesterService {
 
 
     @Override
-    public ArrayList<SemesterDto> getAllSemesters(){
+    public ArrayList<SemesterDto> getAllSemesters() {
         List<Semester> semesters = semesterRepository.findAll();
         return semesters.stream()
                 .map(semester -> SemesterMapper.mapToSemesterDto(semester))
                 .collect(Collectors.toCollection(ArrayList::new));
+    }
+
+    @Override
+    public SemesterDto updateSemester(Long semesterId, SemesterDto updatedSemester) {
+        Semester semester = semesterRepository.findById(semesterId).orElseThrow(
+                () -> new Exceptions("Semester does not exist with this id: "+semesterId)
+        );
+
+        semester.setStartSemester(updatedSemester.getEndSemester());
+        semester.setEndSemester(updatedSemester.getEndSemester());
+
+
+        Semester updatedSemesterObj = semesterRepository.save(semester);
+
+        return SemesterMapper.mapToSemesterDto(updatedSemesterObj);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.qsproject.qsproject.controllers;
 
+import com.example.qsproject.qsproject.User;
 import com.example.qsproject.qsproject.services.UserService;
 import com.example.qsproject.qsproject.dtos.UsersDto;
 import com.example.qsproject.qsproject.repositories.UsersRespository;
@@ -14,6 +15,8 @@ import java.util.List;
 @AllArgsConstructor
 @RestController
 @RequestMapping("/app/users")
+
+
 public class UserController {
 
     private UserService userService;
@@ -26,14 +29,14 @@ public class UserController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<UsersDto> getUserById(@PathVariable("id") int id) {
+    public ResponseEntity<UsersDto> getUserById(@PathVariable("id") long id) {
         UsersDto userDto = userService.getUserById(id);
         return ResponseEntity.ok(userDto);
     }
 
-    // 05/11
+
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<UsersDto> deleteUserById(@PathVariable("id") int id) {
+    public ResponseEntity<UsersDto> deleteUserById(@PathVariable("id") long id) {
         UsersDto deleteUsersDto = userService.deleteUserById(id);
         return new ResponseEntity<>(deleteUsersDto, HttpStatus.OK);
     }
@@ -45,39 +48,10 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-    /*
-
-        @PutMapping("{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable long id,@RequestBody Employee employeeDetails) {
-        Employee updateEmployee = employeeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id: " + id));
-
-        updateEmployee.setFirstName(employeeDetails.getFirstName());
-        updateEmployee.setLastName(employeeDetails.getLastName());
-        updateEmployee.setEmailId(employeeDetails.getEmailId());
-
-        employeeRepository.save(updateEmployee);
-
-        return ResponseEntity.ok(updateEmployee);
+    @PutMapping("{id}")
+    public ResponseEntity<UsersDto> updateUser(@PathVariable("id") long userId,@RequestBody UsersDto updatedUser){
+        UsersDto usersDto = userService.updateUser(userId,updatedUser);
+        return ResponseEntity.ok(usersDto);
     }
 
-
-     */
-
-
-    // Por acabar
-//    @PutMapping("/update/{id}")
-//    public ResponseEntity<UsersDto> updateUser(@PathVariable int id, @RequestBody UsersDto userDto) {
-//
-//
-//        User userUpdate = usersRespository.findById(id).orElseThrow(()-> new Exceptions("Couldnt update this admin."));
-//
-//        userUpdate.setName(userUpdate.getName());
-//        userUpdate.setPassword(userUpdate.getPassword());
-//        userUpdate.setUsername(userUpdate.getUsername());
-//
-//        //.orElseThrow(()-> new Exceptions("Admin not found with this id: "+id));
-//
-//        return ResponseEntity.ok(userDto);
-//    }
 }

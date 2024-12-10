@@ -31,7 +31,7 @@ public class ClassroomImpl {
         public void importCSV(String filePath) {
             try (CSVReader reader = new CSVReader(new FileReader(filePath))) {
                 String[] line;
-                // Ignorar o cabeçalho
+
                 reader.readNext();
 
                 while ((line = reader.readNext()) != null) {
@@ -40,16 +40,20 @@ public class ClassroomImpl {
                     String tipoMaterial = line[2];
                     int capacidade = Integer.parseInt(line[3]);
 
-                    // Criação da entidade Classroom
+
                     Classroom classroom = new Classroom();
                     classroom.setTag(numeroSala);
                     classroom.setDescription(descricao);
                     classroom.setClassroomType(tipoMaterial);
                     classroom.setCapacity(capacidade);
 
+                    if (!classroomRepository.existsByTag(numeroSala)) {
+                        classroomRepository.save(classroom);
+                        System.out.println("Sala " + numeroSala + " importada com sucesso.");
+                    } else {
 
-                    // Salvar no banco de dados
-                    classroomRepository.save(classroom);
+                        System.out.println("Sala " + numeroSala + " já existe, não será importada.");
+                    }
                 }
                 System.out.println("Importação concluída com sucesso!");
             } catch (Exception e) {
@@ -66,10 +70,23 @@ public class ClassroomImpl {
 
         @Override
         public List<ClassroomDto> getAllClassrooms() {
-            List<Classroom> classrooms = classroomRepository.findAll(); // Busca todas as classrooms do repositório
-            return classrooms.stream()  // Converte a lista de classrooms para um stream
-                    .map(ClassroomMapper::mapToClassroomDto) // Usa o mapper para converter cada Classroom em ClassroomDto
-                    .collect(Collectors.toList()); // Coleta os resultados em uma lista de ClassroomDto
+            List<Classroom> classrooms = classroomRepository.findAll();
+            return classrooms.stream()
+                    .map(ClassroomMapper::mapToClassroomDto)
+                    .collect(Collectors.toList());
+        }
+
+        @Override
+        public ClassroomDto updateClassroom(long classroomId, ClassroomDto updatedClassroom) {
+            Classroom classroom = classroomRepository.findById(classroomId).orElseThrow(
+                    () -> new Exceptions("User does not exist with this id: " + classroomId)
+            );
+            classroom.setCapacity(updatedClassroom.getCapacity());
+            classroom.setTag(updatedClassroom.getTag());
+            classroom.setDescription(updatedClassroom.getDescription());
+            classroom.setClassroomType(updatedClassroom.getClassroomType());
+            Classroom updateClassroomObj = classroomRepository.save(classroom);
+            return ClassroomMapper.mapToClassroomDto(updateClassroomObj);
         }
 
 

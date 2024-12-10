@@ -2,6 +2,7 @@ package com.example.qsproject.qsproject.Implementation;
 
 import com.example.qsproject.qsproject.*;
 import com.example.qsproject.qsproject.dtos.CourseDto;
+import com.example.qsproject.qsproject.dtos.SubjectDto;
 import com.example.qsproject.qsproject.dtos.UsersDto;
 import com.example.qsproject.qsproject.mappers.CourseMapper;
 import com.example.qsproject.qsproject.mappers.UserMapper;
@@ -35,7 +36,6 @@ public class CourseImpl implements CourseService {
     }
 
 
-    // 05/11
     @Override
     public CourseDto deleteCourseById(long id){
         Course course = courseRepository.findById(id).orElseThrow(()-> new Exceptions("Couldnt remove admin with this id: "+id));
@@ -43,12 +43,27 @@ public class CourseImpl implements CourseService {
         return CourseMapper.mapToCourseDto(course);
     }
 
-
     @Override
-    public ArrayList<CourseDto> getAllCourses(){
+    public List<CourseDto> getAllCourses(){
         List<Course> courses = courseRepository.findAll();
         return courses.stream()
                 .map(course -> CourseMapper.mapToCourseDto(course))
-                .collect(Collectors.toCollection(ArrayList::new));
+                .collect(Collectors.toList());
     }
+
+    @Override
+    public CourseDto updateCourse(long courseId, CourseDto updateCourse) {
+        Course course = courseRepository.findById(courseId).orElseThrow(
+                () -> new Exceptions("User does not exist with this id: " + courseId)
+        );
+
+        course.setCourseName(updateCourse.getCourseName());
+        // course.setSubjects(updatedCourse.getSubjects());
+
+        Course updateCourseObj = courseRepository.save(course);
+
+        return CourseMapper.mapToCourseDto(updateCourseObj);
+    }
+
+
 }
