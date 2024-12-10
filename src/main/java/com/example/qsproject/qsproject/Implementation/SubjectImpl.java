@@ -1,15 +1,13 @@
 package com.example.qsproject.qsproject.Implementation;
 
-import com.example.qsproject.qsproject.Exceptions;
-import com.example.qsproject.qsproject.Semester;
-import com.example.qsproject.qsproject.Subject;
-import com.example.qsproject.qsproject.User;
+import com.example.qsproject.qsproject.*;
 import com.example.qsproject.qsproject.dtos.SemesterDto;
 import com.example.qsproject.qsproject.dtos.SubjectDto;
 import com.example.qsproject.qsproject.dtos.UsersDto;
 import com.example.qsproject.qsproject.mappers.SemesterMapper;
 import com.example.qsproject.qsproject.mappers.SubjectMapper;
 import com.example.qsproject.qsproject.mappers.UserMapper;
+import com.example.qsproject.qsproject.repositories.CourseRepository;
 import com.example.qsproject.qsproject.repositories.SubjectRepository;
 import com.example.qsproject.qsproject.repositories.UsersRespository;
 import com.example.qsproject.qsproject.services.SubjectService;
@@ -28,13 +26,27 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class SubjectImpl implements SubjectService {
     private SubjectRepository subjectRepository;
+    private CourseRepository courseRepository;
 
     @Override
     public SubjectDto createSubject(SubjectDto subjectDto) {
         Subject subject = SubjectMapper.mapToSubject(subjectDto);
-        Subject saveSubject= subjectRepository.save(subject);
+        Subject saveSubject = subjectRepository.save(subject);
         return SubjectMapper.mapToSubjectDto(saveSubject);
     }
+
+//    @Override
+//    public SubjectDto createSubject(SubjectDto subjectDto) {
+//        Course course = courseRepository.findById(subjectDto.getCourseId())
+//                .orElseThrow(() -> new RuntimeException("Course not found"));
+//
+//        subjectDto.setCourseId(course.getCourseId());
+//        Subject subject = SubjectMapper.mapToSubject(subjectDto);
+//
+//        subject = subjectRepository.save(subject);
+//
+//        return SubjectMapper.mapToSubjectDto(subject);
+//    }
 
     @Override
     public SubjectDto getSubjectById(long id) {

@@ -1,6 +1,7 @@
 package com.example.qsproject.qsproject;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,6 +30,7 @@ public class Course {
 
 
     @OneToMany(mappedBy = "courses", cascade = CascadeType.ALL, orphanRemoval = true)
-    //@JsonManagedReference // added this
+    @JsonManagedReference // added this
+    @JsonIgnore
     private List<Subject> subjects;
 }

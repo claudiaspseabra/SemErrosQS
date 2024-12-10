@@ -16,17 +16,19 @@ import java.util.List;
 public class SubjectMapper {
 
     public static SubjectDto mapToSubjectDto(Subject subject) {
+
         return new SubjectDto(
                 subject.getSubjectId(),
                 subject.getSubjectName(),
-                subject.getCourses(),
+                subject.getSubjectId(),
+                //subject.getCourses() != null ? subject.getCourses().getCourseId(): 0L,
+                //subject.getCourses() != null ? subject.getCourses().getCourseId() :0L,
                 EvaluationMapper.mapToEvaluationDto(subject.getEvaluations()),
                 subject.getStudentsEnrolled(),
                 subject.getSubjectEvaluationType(),
                 subject.getSubjectAttendance()
 
         );
-
     }
     public static List<SubjectDto> mapToSubjectsDto(List<Subject> subjects) {
         if(subjects == null){
@@ -41,16 +43,20 @@ public class SubjectMapper {
     }
 
     public static Subject mapToSubject(SubjectDto subjectDto){
+        Course course = new Course();
+        course.setCourseId(subjectDto.getCourseId());
         return new Subject(
                 subjectDto.getSubjectId(),
                 subjectDto.getSubjectName(),
-                subjectDto.getCourses(),
+                //subjectDto.getCourses(),
+                course,
                 EvaluationMapper.mapToEvaluation(subjectDto.getEvaluations()),
                 subjectDto.getStudentsEnrolled(),
                 subjectDto.getSubjectEvaluationType(),
                 subjectDto.getSubjectAttendance()
         );
     }
+
 
     public static List<Subject> mapToSubjects(List<SubjectDto> subjectDtos) {
         if(subjectDtos == null){

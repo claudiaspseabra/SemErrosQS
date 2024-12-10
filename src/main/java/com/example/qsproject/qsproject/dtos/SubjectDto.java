@@ -16,7 +16,8 @@ import java.util.List;
 public class SubjectDto {
     private long subjectId;
     private String subjectName;
-    private Course courses;
+    //private Course courses;
+    private long courseId;
     private List<EvaluationDto> evaluations;
     private int studentsEnrolled;
     private String subjectEvaluationType;

@@ -35,16 +35,6 @@ public class EvaluationMapper {
         return evaluationDtos;
     }
 
-    //    public static Evaluation mapToEvaluation(EvaluationDto evaluationDto, Subject subject, Classroom classroom){
-//        return new Evaluation(
-//                evaluationDto.getEvaluationId(),
-//                evaluationDto.getEvaluationType(),
-//                evaluationDto.getEvaluationWeight(),
-//                evaluationDto.getEvaluationDate(),
-//                subject, // Use the actual Subject entity here
-//                classroom // Use the actual Classroom entity here
-//        );
-//    }
     public static Evaluation mapToEvaluation(EvaluationDto evaluationDto) {
         Subject subject = new Subject();
         subject.setSubjectId(evaluationDto.getSubjectId());
@@ -72,5 +62,3 @@ public class EvaluationMapper {
         return evaluations;
     }
 }
-
-
