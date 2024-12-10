@@ -17,4 +17,6 @@ public interface EvaluationServices {
 
     // Get all Evaluations
     List<EvaluationDto> getAllEvaluations();
+
+    EvaluationDto updateEvaluations(long evaluationId, Evaluation updateEvalution);
 }

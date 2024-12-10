@@ -1,6 +1,7 @@
 package com.example.qsproject.qsproject.services;
 
 import com.example.qsproject.qsproject.dtos.CourseDto;
+import com.example.qsproject.qsproject.dtos.SubjectDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,4 +16,6 @@ public interface CourseService {
     CourseDto deleteCourseById(long id);
 
     List<CourseDto> getAllCourses();
+
+    CourseDto updateCourse(long courseId, CourseDto updateCourse);
 }

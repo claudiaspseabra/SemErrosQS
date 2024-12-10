@@ -9,4 +9,5 @@ public interface ClassroomServices {
     void importCSV(String csvFilePath);
     ClassroomDto getClassroomById(long id);
     List<ClassroomDto> getAllClassrooms();
+    ClassroomDto updateClassroom(long classroomId, ClassroomDto updatedClassroom);
 }

@@ -3,6 +3,7 @@ package com.example.qsproject.qsproject.Implementation;
 
 import com.example.qsproject.qsproject.Classroom;
 import com.example.qsproject.qsproject.Evaluation;
+import com.example.qsproject.qsproject.Exceptions;
 import com.example.qsproject.qsproject.Subject;
 import com.example.qsproject.qsproject.dtos.EvaluationDto;
 import com.example.qsproject.qsproject.mappers.EvaluationMapper;
@@ -78,5 +79,16 @@ public class EvaluationImpl implements EvaluationServices {
         return evaluations.stream()
                 .map(EvaluationMapper::mapToEvaluationDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public EvaluationDto updateEvaluations(long evaluationId, Evaluation updateEvalution) {
+        Evaluation evaluation = evaluationRepository.findById(evaluationId).orElseThrow(
+                () -> new Exceptions("Evaluation does not exist with this id: " + evaluationId)
+        );
+        evaluation.setEvaluationType(updateEvalution.getEvaluationType());
+        //    evaluation.setEvaluationWeight(updateEvaluation.get());
+        Evaluation updateEvaluationObj = evaluationRepository.save(evaluation);
+        return EvaluationMapper.mapToEvaluationDto(updateEvaluationObj);
     }
 }

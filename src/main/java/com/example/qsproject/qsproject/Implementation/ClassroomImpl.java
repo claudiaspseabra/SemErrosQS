@@ -76,6 +76,19 @@ public class ClassroomImpl {
                     .collect(Collectors.toList());
         }
 
+        @Override
+        public ClassroomDto updateClassroom(long classroomId, ClassroomDto updatedClassroom) {
+            Classroom classroom = classroomRepository.findById(classroomId).orElseThrow(
+                    () -> new Exceptions("User does not exist with this id: " + classroomId)
+            );
+            classroom.setCapacity(updatedClassroom.getCapacity());
+            classroom.setTag(updatedClassroom.getTag());
+            classroom.setDescription(updatedClassroom.getDescription());
+            classroom.setClassroomType(updatedClassroom.getClassroomType());
+            Classroom updateClassroomObj = classroomRepository.save(classroom);
+            return ClassroomMapper.mapToClassroomDto(updateClassroomObj);
+        }
+
 
     }
 
