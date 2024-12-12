@@ -5,10 +5,17 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+/**
+ * @version 1.0
+ * @author Group 6
+ */
+
+/**
+ *  Main application class for the Qsproject application, which runs the Spring Boot application and posts course and subject information at startup.
+ */
+
 @SpringBootApplication
 public class QsprojectApplication {
-
-	// RESOLVER PROBLEMA IDS COURSE ID DENTRO DO SUBJECT ID
 
 	public static void main(String[] args) {
 		SpringApplication.run(QsprojectApplication.class, args);

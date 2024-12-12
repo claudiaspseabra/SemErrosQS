@@ -4,6 +4,15 @@ import com.example.qsproject.qsproject.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-// Isto faz com que o User tenha os métodos CRUD (create ,read ,update,delete)
+/**
+ * @version 1.0
+ * @author Group 6
+ */
+
+/**
+ * Repository interface for accessing and managing User entities in the database.
+ * Extends JpaRepository to provide basic CRUD operations and to do query methods.
+ */
+
 public interface UsersRespository extends JpaRepository<User,Long> {
 }

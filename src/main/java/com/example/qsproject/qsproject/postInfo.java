@@ -5,13 +5,29 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;
-// new class
+
+/**
+ * @version 1.0
+ * @author Group 6
+ */
+
+/**
+ * This class posts course and subject information to the server, checking if they already exist before sending data as JSON.
+ */
+
+
 public class postInfo {
 
     private static final String COURSE_URL = "http://localhost:8080/app/courses";
     private static final String SUBJECT_URL = "http://localhost:8080/app/subjects";
     private static final RestTemplate restTemplate = new RestTemplate();
 
+
+    /**
+     * Checks if a course with the specified name already exists.
+     * @param courseName the name of the course to check
+     * @return true if the course exists, false otherwise
+     */
 
     private static boolean courseExists(String courseName) {
         ResponseEntity<List> response = restTemplate.exchange(
@@ -27,6 +43,12 @@ public class postInfo {
                 ((String) ((java.util.Map) course).get("courseName")).equals(courseName)
         );
     }
+
+
+    /**
+     * Posts a list of courses to the server.
+     * If a course already exists, it is skipped.
+     */
 
     public static void postCourses() {
         List<String> courses = Arrays.asList(
@@ -54,6 +76,14 @@ public class postInfo {
     }
 
 
+
+    /**
+     * Checks if a subject with the specified name already exists for a given course.
+     * @param courseId the ID of the course
+     * @param subjectName the name of the subject to check
+     * @return true if the subject exists, false otherwise
+     */
+
     private static boolean subjectExists(int courseId, String subjectName) {
         ResponseEntity<List> response = restTemplate.exchange(
                 SUBJECT_URL + "?courseId=" + courseId,
@@ -69,6 +99,12 @@ public class postInfo {
         );
     }
 
+
+
+    /**
+     * Posts a list of subjects to the server for different academic years and semesters.
+     * If a subject already exists, it is skipped.
+     */
 
     public static void postSubjects() {
         List<String> year1Semester1Subjects = Arrays.asList(
@@ -131,6 +167,16 @@ public class postInfo {
         postSubjectForYearAndSemester(engineeringCourseId, year3Semester2Subjects, 3, 2);
     }
 
+
+
+    /**
+     * Posts a list of subjects for a given course, year, and semester to the server.
+     * If a subject already exists, it is skipped.
+     * @param courseId the ID of the course
+     * @param subjects the list of subjects to post
+     * @param year the academic year of the subject
+     * @param semester the semester of the subject
+     */
 
     private static void postSubjectForYearAndSemester(int courseId, List<String> subjects, int year, int semester) {
         for (String subject : subjects) {

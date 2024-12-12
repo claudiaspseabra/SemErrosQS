@@ -9,6 +9,19 @@ import lombok.Setter;
 
 import java.util.List;
 
+
+
+/**
+ * @version 1.0
+ * @author Group 6
+ */
+
+/**
+ * This class represents a subject in the system.
+ * It is used to transfer data about the subject between different parts of the application.
+ */
+
+
 @Getter
 @Setter
 @NoArgsConstructor

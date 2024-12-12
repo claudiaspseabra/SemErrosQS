@@ -13,6 +13,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * @version 1.0
+ * @author Group 6
+ */
+
+/**
+ * This class represents a classroom in the system.
+ * It is used to transfer data about the classroom between different parts of the application.
+ */
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,6 +35,5 @@ public class ClassroomDto {
     private String description;
     private String classroomType;
     private int capacity;
-    private List<Long> evaluationIds; // Simplified representation of evaluations
-    //private LocalDate classroomInUseDate; // Updated from java.sql.Date to java.time.LocalDate
+    private List<Long> evaluationIds;
 }

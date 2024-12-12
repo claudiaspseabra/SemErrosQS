@@ -20,7 +20,20 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-// to do
+
+
+/**
+ * @version 1.0
+ * @author Group 6
+ */
+
+
+/**
+ * This class is responsible for managing the requests of the subjects.
+ * It has CRUD methods.
+ */
+
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/app/subjects")
@@ -31,32 +44,26 @@ public class SubjectController {
     private CourseRepository courseRepository;
     private SubjectRepository subjectespository;
 
+    /**
+     * This method is used to create a new subject.
+     *
+     * @param subjectDto The details of the subject to be created.
+     * @return A ResponseEntity with the created subject and status 201.
+     */
+
     @PostMapping
     public ResponseEntity<SubjectDto> createSubject(@RequestBody SubjectDto subjectDto) {
         SubjectDto savedSubjectDto = subjectService.createSubject(subjectDto);
         return new ResponseEntity<>(savedSubjectDto, HttpStatus.CREATED);
     }
 
-//    @PostMapping
-//    public ResponseEntity<SubjectDto> createSubject(@RequestBody SubjectDto subjectDto) {
-//        // Encontra o curso pelo ID
-//        Course course = courseRepository.findById(subjectDto.getCourses().getCourseId())
-//                .orElseThrow(() -> new RuntimeException("Course not found"));
-//
-//        // Cria o Subject
-//        Subject subject = new Subject();
-//        subject.setSubjectName(subjectDto.getSubjectName());
-//        subject.setStudentsEnrolled(subjectDto.getStudentsEnrolled());
-//        subject.setSubjectEvaluationType(subjectDto.getSubjectEvaluationType());
-//        subject.setSubjectAttendance(subjectDto.getSubjectAttendance());
-//        subject.setCourses(course);  // Associa o Subject ao Course
-//
-//        // Salva o Subject no banco
-//        subjectespository.save(subject);
-//
-//        return new ResponseEntity<>(SubjectMapper.mapToSubjectDto(subject), HttpStatus.CREATED);
-//    }
 
+    /**
+     * This method gets a specific subject by its ID.
+     *
+     * @param id The ID of the subject.
+     * @return A ResponseEntity with the subject details.
+     */
 
     @GetMapping("{id}")
     public ResponseEntity<SubjectDto> getSubjectById(@PathVariable("id") int id) {
@@ -64,13 +71,26 @@ public class SubjectController {
         return ResponseEntity.ok(subjectDto);
     }
 
-    // 05/11
+
+    /**
+     * This method deletes a subject by its ID.
+     *
+     * @param id The ID of the subject to be deleted.
+     * @return A ResponseEntity with the deleted subject.
+     */
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<SubjectDto> deleteSubjectById(@PathVariable("id") int id) {
         SubjectDto deleteSubjectDto = subjectService.deleteSubjectById(id);
         return new ResponseEntity<>(deleteSubjectDto, HttpStatus.OK);
     }
 
+
+    /**
+     * This method gets all the subjects.
+     *
+     * @return A ResponseEntity with a list of all subjects.
+     */
 
     @GetMapping()
     public ResponseEntity<List<SubjectDto>> getAllSubjects(){
@@ -79,10 +99,17 @@ public class SubjectController {
     }
 
 
+    /**
+     * Updates an existing subject based on the provided ID and new subject data.
+     *
+     * @param subjectId The ID of the subject to be updated.
+     * @param updatedSubject The data transfer object containing the updated subject information.
+     * @return A ResponseEntity containing the updated SubjectDto.
+     */
+
     @PutMapping("{id}")
     public ResponseEntity<SubjectDto> updateSubject(@PathVariable("id") long subjectId,@RequestBody SubjectDto updatedSubject){
         SubjectDto subjectDto = subjectService.updateSubject(subjectId,updatedSubject);
         return ResponseEntity.ok(subjectDto);
     }
-
 }

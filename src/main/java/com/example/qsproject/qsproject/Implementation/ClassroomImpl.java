@@ -18,6 +18,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
+/**
+ * @version 1.0
+ * @author Group 6
+ */
+
+/**
+ * This class implements the ClassroomServices interface, providing the logic for managing classrooms.
+ * It has methods for importing data from a CSV file, retrieving classroom data, and updating classroom details.
+ */
+
+
 @AllArgsConstructor
 public class ClassroomImpl {
     @Service
@@ -26,6 +38,13 @@ public class ClassroomImpl {
 
         @Autowired
         private ClassroomRepository classroomRepository;
+
+
+        /**
+         * Imports classroom data from a CSV file and saves the classrooms in the repository.
+         *
+         * @param filePath The path to the CSV file containing classroom data.
+         */
 
         @Override
         public void importCSV(String filePath) {
@@ -61,12 +80,27 @@ public class ClassroomImpl {
             }
         }
 
+        /**
+         * Retrieves the classroom by its ID.
+         *
+         * @param id The ID of the classroom to retrieve.
+         * @return A ClassroomDto object containing the classroom details.
+         * @throws Exceptions if the classroom is not found.
+         */
+
         @Override
         public ClassroomDto getClassroomById(long id) {
             Classroom classroom = classroomRepository.findById(id)
                     .orElseThrow(()-> new Exceptions("Classroom not found with this id: "+id));
             return ClassroomMapper.mapToClassroomDto(classroom);
         }
+
+
+        /**
+         * Retrieves all classrooms.
+         *
+         * @return A list of ClassroomDto objects representing all classrooms.
+         */
 
         @Override
         public List<ClassroomDto> getAllClassrooms() {
@@ -75,6 +109,16 @@ public class ClassroomImpl {
                     .map(ClassroomMapper::mapToClassroomDto)
                     .collect(Collectors.toList());
         }
+
+
+        /**
+         * Updates the details of an existing classroom.
+         *
+         * @param classroomId The ID of the classroom to update.
+         * @param updatedClassroom The ClassroomDto containing the updated classroom details.
+         * @return A ClassroomDto object containing the updated classroom details.
+         * @throws Exceptions if the classroom is not found.
+         */
 
         @Override
         public ClassroomDto updateClassroom(long classroomId, ClassroomDto updatedClassroom) {
@@ -88,8 +132,6 @@ public class ClassroomImpl {
             Classroom updateClassroomObj = classroomRepository.save(classroom);
             return ClassroomMapper.mapToClassroomDto(updateClassroomObj);
         }
-
-
     }
 
 }

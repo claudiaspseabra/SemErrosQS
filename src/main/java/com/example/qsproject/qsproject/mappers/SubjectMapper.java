@@ -13,7 +13,26 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+
+/**
+ * @version 1.0
+ * @author Group 6
+ */
+
+/**
+ * This class transforms Subject entities into SubjectDto objects and vice versa.
+ */
+
+
 public class SubjectMapper {
+
+
+    /**
+     * Converts a Subject entity to a SubjectDto.
+     *
+     * @param subject The Subject entity to be converted.
+     * @return A SubjectDto object with data mapped from the Subject entity.
+     */
 
     public static SubjectDto mapToSubjectDto(Subject subject) {
 
@@ -30,6 +49,15 @@ public class SubjectMapper {
 
         );
     }
+
+
+    /**
+     * Converts a list of Subject entities to a list of SubjectDto objects.
+     *
+     * @param subjects The list of Subject entities to be converted.
+     * @return A list of SubjectDto objects.
+     */
+
     public static List<SubjectDto> mapToSubjectsDto(List<Subject> subjects) {
         if(subjects == null){
             return Collections.emptyList();
@@ -58,6 +86,13 @@ public class SubjectMapper {
         );
     }
 
+
+    /**
+     * Converts a SubjectDto to a Subject entity.
+     *
+     * @param subjectDtos The SubjectDto to be converted.
+     * @return A Subject entity with data mapped from the SubjectDto.
+     */
 
     public static List<Subject> mapToSubjects(List<SubjectDto> subjectDtos) {
         if(subjectDtos == null){

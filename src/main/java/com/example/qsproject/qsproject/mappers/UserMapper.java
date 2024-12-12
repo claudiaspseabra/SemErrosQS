@@ -3,9 +3,26 @@ package com.example.qsproject.qsproject.mappers;
 import com.example.qsproject.qsproject.User;
 import com.example.qsproject.qsproject.dtos.UsersDto;
 
+
+/**
+ * @version 1.0
+ * @author Group 6
+ */
+
+/**
+ * This class transforms User entities into UsersDto objects and vice versa.
+ */
+
 public class UserMapper {
 
-    // Serve para converter os dados , userDto serve para passar dados de um user para um website por exemplo
+
+    /**
+     * Converts a User entity to a UsersDto.
+     *
+     * @param user The User entity to be converted.
+     * @return A UsersDto object with data mapped from the User entity.
+     */
+
     public static UsersDto mapToUserDto(User user) {
         return new UsersDto(
                 user.getUserId(),
@@ -16,7 +33,14 @@ public class UserMapper {
         );
     }
 
-    // Serve para converter um UserDto em User, por exemplo ao receber algum input num website/app
+
+    /**
+     * Converts a UsersDto to a User entity.
+     *
+     * @param usersDto The UsersDto to be converted.
+     * @return A User entity with data mapped from the UsersDto.
+     */
+
     public static User mapToUser(UsersDto usersDto){
         return new User(
                 usersDto.getUserId(),
@@ -26,6 +50,4 @@ public class UserMapper {
                 usersDto.getRole()
         );
     }
-
-
 }
