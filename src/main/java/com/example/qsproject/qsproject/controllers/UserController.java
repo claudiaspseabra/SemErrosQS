@@ -20,7 +20,7 @@ import java.util.List;
 
 /**
  * This class is responsible for managing the requests of the user.
- * It has CRUD methods.
+ * It has create, read, update and delete and methods.
  */
 
 @AllArgsConstructor
