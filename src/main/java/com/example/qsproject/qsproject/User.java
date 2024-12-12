@@ -29,6 +29,9 @@ public class User {
     @Column(name = "username",nullable = false , unique = true)
     private String username;
 
+    @Column(name = "role",nullable = false)
+    private String role;
+
     // new
     /*
     @ManyToMany(fetch = FetchType.EAGER , cascade = CascadeType.ALL)
