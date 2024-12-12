@@ -10,6 +10,17 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
+
+/**
+ * @version 1.0
+ * @author Group 6
+ */
+
+/**
+ * This class represents an evaluation in the system.
+ * It is used to transfer data about the evaluation between different parts of the application.
+ */
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -19,6 +30,6 @@ public class EvaluationDto {
     private String evaluationType;
     private double evaluationWeight;
     private LocalDate evaluationDate;
-    private long subjectId; // Lightweight representation of Subject
-    private long classroomId; // Lightweight representation of Classroom
+    private long subjectId;
+    private long classroomId;
 }

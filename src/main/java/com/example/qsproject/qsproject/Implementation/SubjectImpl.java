@@ -22,11 +22,29 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 
+/**
+ * @version 1.0
+ * @author Group 6
+ */
+
+/**
+ * This class implements the SubjectService interface, providing logic for managing subjects.
+ * It offers methods for creating, retrieving, deleting, and updating subjects in the system.
+ */
+
 @Service
 @AllArgsConstructor
 public class SubjectImpl implements SubjectService {
     private SubjectRepository subjectRepository;
     private CourseRepository courseRepository;
+
+
+    /**
+     * Creates a new subject from the provided SubjectDto.
+     *
+     * @param subjectDto The SubjectDto object containing the subject details.
+     * @return A SubjectDto object representing the newly created subject.
+     */
 
     @Override
     public SubjectDto createSubject(SubjectDto subjectDto) {
@@ -35,18 +53,14 @@ public class SubjectImpl implements SubjectService {
         return SubjectMapper.mapToSubjectDto(saveSubject);
     }
 
-//    @Override
-//    public SubjectDto createSubject(SubjectDto subjectDto) {
-//        Course course = courseRepository.findById(subjectDto.getCourseId())
-//                .orElseThrow(() -> new RuntimeException("Course not found"));
-//
-//        subjectDto.setCourseId(course.getCourseId());
-//        Subject subject = SubjectMapper.mapToSubject(subjectDto);
-//
-//        subject = subjectRepository.save(subject);
-//
-//        return SubjectMapper.mapToSubjectDto(subject);
-//    }
+
+    /**
+     * Retrieves a subject by its ID.
+     *
+     * @param id The ID of the subject to retrieve.
+     * @return A SubjectDto object containing the details of the requested subject.
+     * @throws Exceptions if the subject is not found.
+     */
 
     @Override
     public SubjectDto getSubjectById(long id) {
@@ -54,6 +68,15 @@ public class SubjectImpl implements SubjectService {
                 .orElseThrow(()-> new Exceptions("Subject not found with this id: "+id));
         return SubjectMapper.mapToSubjectDto(subject);
     }
+
+
+    /**
+     * Deletes a subject by its ID.
+     *
+     * @param id The ID of the subject to delete.
+     * @return A SubjectDto object containing the details of the deleted subject.
+     * @throws Exceptions if the subject is not found.
+     */
 
     @Override
     public SubjectDto deleteSubjectById(long id) {
@@ -63,6 +86,11 @@ public class SubjectImpl implements SubjectService {
     }
 
 
+    /**
+     * Retrieves all subjects in the system.
+     *
+     * @return A list of SemesterDto objects representing all subjects.
+     */
 
     @Override
     public List<SubjectDto> getAllSubjects(){
@@ -70,6 +98,16 @@ public class SubjectImpl implements SubjectService {
         return subjects.stream().map((subject)->SubjectMapper.mapToSubjectDto(subject))
                 .collect(Collectors.toList());
     }
+
+
+    /**
+     * Updates the details of an existing subject.
+     *
+     * @param subjectId The ID of the subject to update.
+     * @param updatedSubject The SubjectDto object containing the updated subject details.
+     * @return A SubjectDto object containing the updated subject details.
+     * @throws Exceptions if the subject is not found.
+     */
 
     @Override
     public SubjectDto updateSubject(Long subjectId, SubjectDto updatedSubject) {
@@ -81,6 +119,8 @@ public class SubjectImpl implements SubjectService {
         subject.setStudentsEnrolled(updatedSubject.getStudentsEnrolled());
         subject.setSubjectEvaluationType(updatedSubject.getSubjectEvaluationType());
         subject.setSubjectAttendance(updatedSubject.getSubjectAttendance());
+        subject.setSubjectYear(updatedSubject.getSubjectYear());
+        subject.setSubjectSemester(updatedSubject.getSubjectSemester());
 
         Subject updatedSubjectObj = subjectRepository.save(subject);
 

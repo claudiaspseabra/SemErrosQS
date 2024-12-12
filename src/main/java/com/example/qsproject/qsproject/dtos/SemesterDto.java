@@ -7,6 +7,17 @@ import lombok.Setter;
 
 import java.util.Date;
 
+
+/**
+ * @version 1.0
+ * @author Group 6
+ */
+
+/**
+ * This class represents a semester in the system.
+ * It is used to transfer data about the semester between different parts of the application.
+ */
+
 @Getter
 @Setter
 @NoArgsConstructor

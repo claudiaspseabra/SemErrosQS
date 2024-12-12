@@ -10,6 +10,15 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @version 1.0
+ * @author Group 6
+ */
+
+/**
+ * Represents a classroom entity with properties like tag, description, type, capacity and a list of associated evaluations.
+ */
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,26 +27,49 @@ import java.util.List;
 @Table(name = "classrooms")
 public class Classroom {
 
-    //classe classroom
-
+    /**
+     * The unique ID of the classroom.
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long classroomId;
 
+    /**
+     * Unique tag of the classroom.
+     */
+
     @Column(name = "tag", nullable = false, unique = true)
     private String tag;
+
+
+    /**
+     * Description of the classroom.
+     */
 
     @Column(name = "description", nullable = false)
     private String description;
 
+
+    /**
+     * Type of the classroom.
+     */
+
     @Column(name = "classroomType", nullable = false)
     private String classroomType;
+
+
+    /**
+     * Capacity of the classroom.
+     */
 
     @Column(name = "capacity", nullable = false)
     private int capacity;
 
-    // Bidirectional mapping to Evaluation
+
+    /**
+     * List of evaluations related to this classroom.
+     */
+
     @OneToMany(mappedBy = "classroom", cascade = CascadeType.ALL, orphanRemoval = true)
-    //@JsonBackReference // Avoid circular references in serialization
     private List<Evaluation> evaluations = new ArrayList<>();
 }

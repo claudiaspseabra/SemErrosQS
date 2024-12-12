@@ -13,6 +13,16 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @version 1.0
+ * @author Group 6
+ */
+
+
+/**
+ * This class is responsible for handling classroom requests.
+ */
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/app/classrooms")
@@ -20,16 +30,29 @@ public class ClassroomController {
 
     private ClassroomServices classroomServices;
 
+
+    /**
+     * Fetches a specific classroom by its ID.
+     *
+     * @param id The unique identifier of the classroom.
+     * @return A ResponseEntity containing the ClassroomDto
+     */
+
     @GetMapping("{id}")
     public ResponseEntity<ClassroomDto> getClassroomById(@PathVariable("id") long id) {
         ClassroomDto classroomDto = classroomServices.getClassroomById(id);
         return ResponseEntity.ok(classroomDto);
     }
 
+
+    /**
+     * Fetches all the classrooms registered.
+     * @return A ResponseEntity containing a list of ClassroomDto objects.
+     */
+
     @GetMapping()
     public ResponseEntity<List<ClassroomDto>> getAllClassrooms(){
         List<ClassroomDto> classrooms = classroomServices.getAllClassrooms();
         return ResponseEntity.ok(classrooms);
     }
-
 }

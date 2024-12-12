@@ -17,6 +17,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * @version 1.0
+ * @author Group 6
+ */
+
+/**
+ * This class implements the EvaluationServices interface, providing functionality to manage evaluations.
+ * It offers methods for creating, retrieving, deleting, and updating evaluations in the system.
+ */
+
 @Service
 public class EvaluationImpl implements EvaluationServices {
 
@@ -29,6 +39,15 @@ public class EvaluationImpl implements EvaluationServices {
     @Autowired
     private EvaluationRepository evaluationRepository;
 
+
+    /**
+     * Creates a new evaluation using the provided EvaluationDto and fetches the associated Subject and Classroom entities.
+     *
+     * @param evaluationDto The EvaluationDto object containing evaluation details.
+     * @return A EvaluationDto object representing the newly created evaluation.
+     * @throws RuntimeException If the Subject or Classroom is not found.
+     */
+
     @Override
     public EvaluationDto createEvaluation(EvaluationDto evaluationDto) {
         // Fetch Subject and Classroom by their IDs
@@ -38,20 +57,25 @@ public class EvaluationImpl implements EvaluationServices {
         Classroom classroom = classroomRepository.findById(evaluationDto.getClassroomId())
                 .orElseThrow(() -> new RuntimeException("Classroom not found"));
 
-        // Convert EvaluationDto to Evaluation entity with the actual Subject and Classroom entities
+
         evaluationDto.setSubjectId(subject.getSubjectId());
         evaluationDto.setClassroomId(classroom.getClassroomId());
         Evaluation evaluation = EvaluationMapper.mapToEvaluation(evaluationDto);
 
-        // Save the Evaluation entity
         evaluation = evaluationRepository.save(evaluation);
 
-        // Return the saved Evaluation as EvaluationDto
         return EvaluationMapper.mapToEvaluationDto(evaluation);
     }
 
 
-    // Get an Evaluation by its ID
+    /**
+     * Retrieves an evaluation by its ID.
+     *
+     * @param id The ID of the evaluation to retrieve.
+     * @return An EvaluationDto object containing the details of the requested evaluation.
+     * @throws Exceptions if the evaluation is not found.
+     */
+
     @Override
     public EvaluationDto getEvaluationById(long id) {
         Evaluation evaluation = evaluationRepository.findById(id)
@@ -60,7 +84,15 @@ public class EvaluationImpl implements EvaluationServices {
         return EvaluationMapper.mapToEvaluationDto(evaluation);
     }
 
-    // Delete an Evaluation by its ID
+
+    /**
+     * Deletes an evaluation by its ID.
+     *
+     * @param id The ID of the evaluation to delete.
+     * @return An EvaluationDto object containing the details of the deleted evaluation.
+     * @throws Exceptions if the evaluation is not found.
+     */
+
     @Override
     public EvaluationDto deleteEvaluationById(long id) {
         Evaluation evaluation = evaluationRepository.findById(id)
@@ -71,7 +103,13 @@ public class EvaluationImpl implements EvaluationServices {
         return EvaluationMapper.mapToEvaluationDto(evaluation);
     }
 
-    // Get all Evaluations
+
+    /**
+     * Retrieves all evaluations in the system.
+     *
+     * @return A list of objects representing all evaluations.
+     */
+
     @Override
     public List<EvaluationDto> getAllEvaluations() {
         List<Evaluation> evaluations = evaluationRepository.findAll();
@@ -80,6 +118,16 @@ public class EvaluationImpl implements EvaluationServices {
                 .map(EvaluationMapper::mapToEvaluationDto)
                 .collect(Collectors.toList());
     }
+
+
+    /**
+     * Updates the details of an existing evaluation.
+     *
+     * @param evaluationId The ID of the evaluation to update.
+     * @param updateEvalution The Evaluation object containing the updated evaluation details.
+     * @return A EvaluationDto object containing the updated evaluation details.
+     * @throws Exceptions if the evaluation is not found.
+     */
 
     @Override
     public EvaluationDto updateEvaluations(long evaluationId, Evaluation updateEvalution) {

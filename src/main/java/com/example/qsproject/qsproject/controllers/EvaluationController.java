@@ -13,6 +13,18 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+/**
+ * @version 1.0
+ * @author Group 6
+ */
+
+
+/**
+ * This class is responsible for managing evaluations requests.
+ * It has CRUD methods.
+ */
+
 @AllArgsConstructor
 @RestController
 @RequestMapping("/app/evaluations")
@@ -21,12 +33,27 @@ public class EvaluationController {
     private EvaluationServices evaluationServices;
     private EvaluationRepository evaluationRepository;
 
+
+    /**
+     * This method is used to create a new evaluation.
+     *
+     * @param evaluationDto The details of the evalution to be created.
+     * @return A ResponseEntity with the created evalution and status 201.
+     */
+
     @PostMapping
     public ResponseEntity<EvaluationDto> createEvaluation(@RequestBody EvaluationDto evaluationDto) {
-        // Call service to create evaluation
         EvaluationDto savedEvaluationDto = evaluationServices.createEvaluation(evaluationDto);
         return new ResponseEntity<>(savedEvaluationDto, HttpStatus.CREATED);
     }
+
+
+    /**
+     * This method gets a specific evaluation by its ID.
+     *
+     * @param id The ID of the evaluation.
+     * @return A ResponseEntity with the evaluation details.
+     */
 
     @GetMapping("{id}")
     public ResponseEntity<EvaluationDto> getEvaluationById(@PathVariable("id") long id) {
@@ -35,6 +62,13 @@ public class EvaluationController {
     }
 
 
+    /**
+     * This method deletes an evaluation by its ID.
+     *
+     * @param id The ID of the evaluation to be deleted.
+     * @return A ResponseEntity with the deleted evaluation.
+     */
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<EvaluationDto> deleteEvaluationById(@PathVariable("id") long id) {
         EvaluationDto deleteEvaluationDto = evaluationServices.deleteEvaluationById(id);
@@ -42,10 +76,15 @@ public class EvaluationController {
     }
 
 
+    /**
+     * This method gets all the evaluations.
+     *
+     * @return A ResponseEntity with a list of all evaluation.
+     */
+
     @GetMapping()
     public ResponseEntity<List<EvaluationDto>> getAllEvaluations(){
         List<EvaluationDto> evaluations = evaluationServices.getAllEvaluations();
         return ResponseEntity.ok(evaluations);
     }
-
 }

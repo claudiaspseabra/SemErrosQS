@@ -13,23 +13,51 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+
+/**
+ * @version 1.0
+ * @author Group 6
+ */
+
+/**
+ * This class transforms Subject entities into SubjectDto objects and vice versa.
+ */
+
+
 public class SubjectMapper {
+
+
+    /**
+     * Converts a Subject entity to a SubjectDto.
+     *
+     * @param subject The Subject entity to be converted.
+     * @return A SubjectDto object with data mapped from the Subject entity.
+     */
 
     public static SubjectDto mapToSubjectDto(Subject subject) {
 
         return new SubjectDto(
                 subject.getSubjectId(),
                 subject.getSubjectName(),
-                subject.getSubjectId(),
-                //subject.getCourses() != null ? subject.getCourses().getCourseId(): 0L,
-                //subject.getCourses() != null ? subject.getCourses().getCourseId() :0L,
+                subject.getCourses() != null ? subject.getCourses().getCourseId() : 0L,
                 EvaluationMapper.mapToEvaluationDto(subject.getEvaluations()),
                 subject.getStudentsEnrolled(),
                 subject.getSubjectEvaluationType(),
-                subject.getSubjectAttendance()
+                subject.getSubjectAttendance(),
+                subject.getSubjectYear(),
+                subject.getSubjectSemester()
 
         );
     }
+
+
+    /**
+     * Converts a list of Subject entities to a list of SubjectDto objects.
+     *
+     * @param subjects The list of Subject entities to be converted.
+     * @return A list of SubjectDto objects.
+     */
+
     public static List<SubjectDto> mapToSubjectsDto(List<Subject> subjects) {
         if(subjects == null){
             return Collections.emptyList();
@@ -48,15 +76,23 @@ public class SubjectMapper {
         return new Subject(
                 subjectDto.getSubjectId(),
                 subjectDto.getSubjectName(),
-                //subjectDto.getCourses(),
                 course,
                 EvaluationMapper.mapToEvaluation(subjectDto.getEvaluations()),
                 subjectDto.getStudentsEnrolled(),
                 subjectDto.getSubjectEvaluationType(),
-                subjectDto.getSubjectAttendance()
+                subjectDto.getSubjectAttendance(),
+                subjectDto.getSubjectYear(),
+                subjectDto.getSubjectSemester()
         );
     }
 
+
+    /**
+     * Converts a SubjectDto to a Subject entity.
+     *
+     * @param subjectDtos The SubjectDto to be converted.
+     * @return A Subject entity with data mapped from the SubjectDto.
+     */
 
     public static List<Subject> mapToSubjects(List<SubjectDto> subjectDtos) {
         if(subjectDtos == null){
@@ -70,4 +106,3 @@ public class SubjectMapper {
         return subjects;
     }
 }
-

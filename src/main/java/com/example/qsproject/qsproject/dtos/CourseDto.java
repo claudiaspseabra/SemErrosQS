@@ -9,6 +9,17 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * @version 1.0
+ * @author Group 6
+ */
+
+/**
+ * This class represents a course in the system.
+ * It is used to transfer data about the course between different parts of the application.
+ */
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -16,5 +27,6 @@ import java.util.List;
 public class CourseDto {
     private long CourseId;
     private String courseName;
+    private int courseDuration;
     private List<SubjectDto> subjects;
 }
