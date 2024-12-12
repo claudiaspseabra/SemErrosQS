@@ -8,9 +8,11 @@ import com.example.qsproject.qsproject.mappers.CourseMapper;
 import com.example.qsproject.qsproject.mappers.UserMapper;
 import com.example.qsproject.qsproject.repositories.CourseRepository;
 import com.example.qsproject.qsproject.services.CourseService;
+import com.opencsv.CSVReader;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -54,11 +56,12 @@ public class CourseImpl implements CourseService {
     @Override
     public CourseDto updateCourse(long courseId, CourseDto updateCourse) {
         Course course = courseRepository.findById(courseId).orElseThrow(
-                () -> new Exceptions("User does not exist with this id: " + courseId)
+                () -> new Exceptions("Course does not exist with this id: " + courseId)
         );
 
         course.setCourseName(updateCourse.getCourseName());
-        // course.setSubjects(updatedCourse.getSubjects());
+        //course.setSubjects(updatedCourse.getSubjects());
+        course.setCourseDuration(updateCourse.getCourseDuration());
 
         Course updateCourseObj = courseRepository.save(course);
 

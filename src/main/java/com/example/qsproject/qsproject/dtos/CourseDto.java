@@ -16,5 +16,6 @@ import java.util.List;
 public class CourseDto {
     private long CourseId;
     private String courseName;
+    private int courseDuration;
     private List<SubjectDto> subjects;
 }

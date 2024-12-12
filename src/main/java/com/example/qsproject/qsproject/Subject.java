@@ -30,7 +30,7 @@ public class Subject {
 
     @ManyToOne
     @JoinColumn(name= "course_id")
-    @JsonBackReference // added this
+    //@JsonBackReference //AAAAAA
     private Course courses;
 
     //@Column(name="evaluations")
@@ -46,5 +46,11 @@ public class Subject {
 
     @Column(name = "subjectAttendance", nullable = false)
     private String subjectAttendance;
+
+    @Column(name = "subjectYear", nullable = false)
+    private int subjectYear;
+
+    @Column(name = "subjectSemester", nullable = false)
+    private int subjectSemester;
 
 }

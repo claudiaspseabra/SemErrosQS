@@ -9,6 +9,7 @@ public class CourseMapper {
         return new CourseDto(
                 course.getCourseId(),
                 course.getCourseName(),
+                course.getCourseDuration(),
                 SubjectMapper.mapToSubjectsDto(course.getSubjects())
         );
     }
@@ -17,6 +18,7 @@ public class CourseMapper {
         return new Course(
                 courseDto.getCourseId(),
                 courseDto.getCourseName(),
+                courseDto.getCourseDuration(),
                 SubjectMapper.mapToSubjects(courseDto.getSubjects())
         );
     }

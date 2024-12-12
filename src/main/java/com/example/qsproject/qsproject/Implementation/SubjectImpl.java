@@ -81,6 +81,8 @@ public class SubjectImpl implements SubjectService {
         subject.setStudentsEnrolled(updatedSubject.getStudentsEnrolled());
         subject.setSubjectEvaluationType(updatedSubject.getSubjectEvaluationType());
         subject.setSubjectAttendance(updatedSubject.getSubjectAttendance());
+        subject.setSubjectYear(updatedSubject.getSubjectYear());
+        subject.setSubjectSemester(updatedSubject.getSubjectSemester());
 
         Subject updatedSubjectObj = subjectRepository.save(subject);
 

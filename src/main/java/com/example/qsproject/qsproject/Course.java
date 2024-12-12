@@ -28,9 +28,11 @@ public class Course {
     @Column(name = "courseName",unique = true,nullable = false)
     private String courseName;
 
+    @Column(name = "courseDuration",nullable = false)
+    private int courseDuration;
 
     @OneToMany(mappedBy = "courses", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference // added this
+    //@JsonManagedReference // added this AAAAA
     @JsonIgnore
     private List<Subject> subjects;
 }

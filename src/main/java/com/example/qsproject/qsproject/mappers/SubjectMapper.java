@@ -20,13 +20,13 @@ public class SubjectMapper {
         return new SubjectDto(
                 subject.getSubjectId(),
                 subject.getSubjectName(),
-                subject.getSubjectId(),
-                //subject.getCourses() != null ? subject.getCourses().getCourseId(): 0L,
-                //subject.getCourses() != null ? subject.getCourses().getCourseId() :0L,
+                subject.getCourses() != null ? subject.getCourses().getCourseId() : 0L,
                 EvaluationMapper.mapToEvaluationDto(subject.getEvaluations()),
                 subject.getStudentsEnrolled(),
                 subject.getSubjectEvaluationType(),
-                subject.getSubjectAttendance()
+                subject.getSubjectAttendance(),
+                subject.getSubjectYear(),
+                subject.getSubjectSemester()
 
         );
     }
@@ -48,12 +48,13 @@ public class SubjectMapper {
         return new Subject(
                 subjectDto.getSubjectId(),
                 subjectDto.getSubjectName(),
-                //subjectDto.getCourses(),
                 course,
                 EvaluationMapper.mapToEvaluation(subjectDto.getEvaluations()),
                 subjectDto.getStudentsEnrolled(),
                 subjectDto.getSubjectEvaluationType(),
-                subjectDto.getSubjectAttendance()
+                subjectDto.getSubjectAttendance(),
+                subjectDto.getSubjectYear(),
+                subjectDto.getSubjectSemester()
         );
     }
 
@@ -70,4 +71,3 @@ public class SubjectMapper {
         return subjects;
     }
 }
-

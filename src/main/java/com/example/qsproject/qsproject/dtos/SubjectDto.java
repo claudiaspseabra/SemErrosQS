@@ -22,5 +22,7 @@ public class SubjectDto {
     private int studentsEnrolled;
     private String subjectEvaluationType;
     private String subjectAttendance;
+    private int subjectYear;
+    private int subjectSemester;
 }
 
