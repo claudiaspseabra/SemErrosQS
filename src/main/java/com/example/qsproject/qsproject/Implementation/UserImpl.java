@@ -120,5 +120,12 @@ public class UserImpl implements UserService {
 
         return UserMapper.mapToUserDto(updatedUserObj);
     }
+    public User validateUser(String username, String password) {
+        User user = usersRespository.findByUsername(username);
+        if (user != null && user.getPassword().equals(password)) {
+            return user;
+        }
+        return null;
+    }
 
 }

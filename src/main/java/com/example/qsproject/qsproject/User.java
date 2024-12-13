@@ -66,8 +66,7 @@ public class User {
      * The role of the user in the system.
      * This field cannot be null.
      */
-    @Column(name = "role",nullable = false)
-    private String role;
 
-
+    @Column(name = "is_admin", nullable = false)
+    private boolean isAdmin;
 }

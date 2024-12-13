@@ -66,4 +66,6 @@ public interface UserService {
      */
 
     UsersDto updateUser(Long userId, UsersDto updatedUser);
+    User validateUser(String username, String password);
+
 }

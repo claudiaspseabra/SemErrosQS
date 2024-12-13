@@ -1,6 +1,7 @@
 package com.example.qsproject.qsproject.controllers;
 
 import com.example.qsproject.qsproject.User;
+import com.example.qsproject.qsproject.mappers.UserMapper;
 import com.example.qsproject.qsproject.services.UserService;
 import com.example.qsproject.qsproject.dtos.UsersDto;
 import com.example.qsproject.qsproject.repositories.UsersRespository;
@@ -99,6 +100,36 @@ public class UserController {
     public ResponseEntity<UsersDto> updateUser(@PathVariable("id") long userId,@RequestBody UsersDto updatedUser){
         UsersDto usersDto = userService.updateUser(userId,updatedUser);
         return ResponseEntity.ok(usersDto);
+    }
+    @PostMapping("/login")
+    public ResponseEntity<UsersDto> login(@RequestBody LoginRequest loginRequest) {
+        User user = userService.validateUser(loginRequest.getUsername(), loginRequest.getPassword());
+        if (user != null) {
+            UsersDto usersDto = UserMapper.mapToUserDto(user);
+            return ResponseEntity.ok(usersDto);
+        }
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    }
+    public static class LoginRequest {
+        private String username;
+        private String password;
+
+        // Getters and setters
+        public String getUsername() {
+            return username;
+        }
+
+        public void setUsername(String username) {
+            this.username = username;
+        }
+
+        public String getPassword() {
+            return password;
+        }
+
+        public void setPassword(String password) {
+            this.password = password;
+        }
     }
 
 }

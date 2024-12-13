@@ -29,7 +29,7 @@ public class UserMapper {
                 user.getName(),
                 user.getPassword(),
                 user.getUsername(),
-                user.getRole()
+                user.isAdmin()
         );
     }
 
@@ -47,7 +47,9 @@ public class UserMapper {
                 usersDto.getName(),
                 usersDto.getPassword(),
                 usersDto.getUsername(),
-                usersDto.getRole()
+                usersDto.isAdmin()
         );
     }
+
+
 }
