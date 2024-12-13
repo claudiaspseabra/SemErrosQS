@@ -68,7 +68,7 @@ public class SemesterController {
      * @return A ResponseEntity with the deleted semester.
      */
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<SemesterDto> deleteSemesterById(@PathVariable("id") long id) {
         SemesterDto deleteSemesterDto = semesterService.deleteSemesterById(id);
         return new ResponseEntity<>(deleteSemesterDto, HttpStatus.OK);

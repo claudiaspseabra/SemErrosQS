@@ -84,7 +84,7 @@ public class SubjectController {
      * @return A ResponseEntity with the deleted subject.
      */
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<SubjectDto> deleteSubjectById(@PathVariable("id") int id) {
         SubjectDto deleteSubjectDto = subjectService.deleteSubjectById(id);
         return new ResponseEntity<>(deleteSubjectDto, HttpStatus.OK);

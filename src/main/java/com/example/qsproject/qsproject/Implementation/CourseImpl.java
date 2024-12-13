@@ -40,6 +40,7 @@ public class CourseImpl implements CourseService {
      * @return A CourseDto object representing the newly created course.
      */
 
+
     @Override
     public CourseDto createCourse(CourseDto coursesDto) {
         Course course = CourseMapper.mapToCourse(coursesDto);
@@ -73,7 +74,7 @@ public class CourseImpl implements CourseService {
 
     @Override
     public CourseDto deleteCourseById(long id){
-        Course course = courseRepository.findById(id).orElseThrow(()-> new Exceptions("Couldnt remove admin with this id: "+id));
+        Course course = courseRepository.findById(id).orElseThrow(()-> new Exceptions("Couldnt remove course with this id: "+id));
         courseRepository.delete(course);
         return CourseMapper.mapToCourseDto(course);
     }
