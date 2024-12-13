@@ -52,10 +52,15 @@ public class SubjectController {
      */
 
     @PostMapping
-    public ResponseEntity<SubjectDto> createSubject(@RequestBody SubjectDto subjectDto) {
+    public ResponseEntity<?> createSubject(@RequestBody SubjectDto subjectDto) {
+        if (subjectDto.getSubjectAttendance() != null && !"sim".equalsIgnoreCase(subjectDto.getSubjectAttendance()) && !"nao".equalsIgnoreCase(subjectDto.getSubjectAttendance())) {
+            return ResponseEntity.badRequest().body("Attendance must be 'sim' or 'nao'");
+        }
+
         SubjectDto savedSubjectDto = subjectService.createSubject(subjectDto);
-        return new ResponseEntity<>(savedSubjectDto, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedSubjectDto);
     }
+
 
 
     /**

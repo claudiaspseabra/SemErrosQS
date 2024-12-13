@@ -2,10 +2,12 @@ package com.example.qsproject.qsproject.dtos;
 
 import com.example.qsproject.qsproject.Course;
 import com.example.qsproject.qsproject.Evaluation;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 import java.util.List;
 

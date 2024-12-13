@@ -93,7 +93,7 @@ public class Subject {
      * This field cannot be null.
      */
 
-    @Column(name = "subjectAttendance", nullable = false)
+    @Column(name = "subjectAttendance")
     private String subjectAttendance;
 
 
