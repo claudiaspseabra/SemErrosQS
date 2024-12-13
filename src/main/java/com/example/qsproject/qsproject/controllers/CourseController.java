@@ -65,7 +65,7 @@ public class CourseController {
      * @return A ResponseEntity with the deleted course.
      */
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<CourseDto> deleteCourseById(@PathVariable("id") int id) {
         CourseDto deletedCourseDto = courseService.deleteCourseById(id);
         return new ResponseEntity<>(deletedCourseDto, HttpStatus.OK);

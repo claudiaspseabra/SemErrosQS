@@ -69,7 +69,7 @@ public class EvaluationController {
      * @return A ResponseEntity with the deleted evaluation.
      */
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<EvaluationDto> deleteEvaluationById(@PathVariable("id") long id) {
         EvaluationDto deleteEvaluationDto = evaluationServices.deleteEvaluationById(id);
         return new ResponseEntity<>(deleteEvaluationDto, HttpStatus.OK);
