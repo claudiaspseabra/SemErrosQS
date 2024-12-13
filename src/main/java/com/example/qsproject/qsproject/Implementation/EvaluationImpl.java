@@ -6,6 +6,7 @@ import com.example.qsproject.qsproject.Evaluation;
 import com.example.qsproject.qsproject.Exceptions;
 import com.example.qsproject.qsproject.Subject;
 import com.example.qsproject.qsproject.dtos.EvaluationDto;
+import com.example.qsproject.qsproject.dtos.SubjectDto;
 import com.example.qsproject.qsproject.mappers.EvaluationMapper;
 import com.example.qsproject.qsproject.repositories.ClassroomRepository;
 import com.example.qsproject.qsproject.repositories.SubjectRepository;
@@ -50,16 +51,43 @@ public class EvaluationImpl implements EvaluationServices {
 
     @Override
     public EvaluationDto createEvaluation(EvaluationDto evaluationDto) {
-        // Fetch Subject and Classroom by their IDs
+
+        long subjectId = evaluationDto.getSubjectId();
+
+        Subject specificSubject = subjectRepository.findById(subjectId)
+                .orElseThrow(() -> new RuntimeException("Subject not found"));
+
+        int numberOfStudents = specificSubject.getStudentsEnrolled();
+
+        Classroom assignedClassroom = classroomRepository.findAll().stream()
+                .filter(classroom -> classroom.getCapacity() >= numberOfStudents)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("No classrooms available"));
+
+        evaluationDto.setClassroomId(assignedClassroom.getClassroomId());
+
+        if (evaluationDto.getEvaluationWeight() <= 0) {
+            throw new RuntimeException("The evaluation weight cannot be negative or zero.");
+        }
+
         Subject subject = subjectRepository.findById(evaluationDto.getSubjectId())
                 .orElseThrow(() -> new RuntimeException("Subject not found"));
+
+        double totalWeight = evaluationRepository.findBySubject_SubjectId(subject.getSubjectId()).stream()
+                .mapToDouble(Evaluation::getEvaluationWeight)
+                .sum();
+
+        totalWeight += evaluationDto.getEvaluationWeight();
+        if (totalWeight > 100) {
+            throw new RuntimeException("The sum of the evaluation weights for this Subject cannot exceed 100%");
+        }
 
         Classroom classroom = classroomRepository.findById(evaluationDto.getClassroomId())
                 .orElseThrow(() -> new RuntimeException("Classroom not found"));
 
-
         evaluationDto.setSubjectId(subject.getSubjectId());
         evaluationDto.setClassroomId(classroom.getClassroomId());
+
         Evaluation evaluation = EvaluationMapper.mapToEvaluation(evaluationDto);
 
         evaluation = evaluationRepository.save(evaluation);
