@@ -185,12 +185,21 @@ public class postInfo {
                 continue;
             }
 
+//            String subjectJson = "{"
+//                    + "\"subjectName\": \"" + subject + "\","
+//                    + "\"courseId\": " + courseId + ","
+//                    + "\"studentsEnrolled\": 10,"
+//                    + "\"subjectEvaluationType\": \"Mista\","
+//                    + "\"subjectAttendance\": \"20\","
+//                    + "\"subjectYear\": " + year + ","
+//                    + "\"subjectSemester\": " + semester
+//                    + "}";
+
             String subjectJson = "{"
                     + "\"subjectName\": \"" + subject + "\","
                     + "\"courseId\": " + courseId + ","
                     + "\"studentsEnrolled\": 10,"
                     + "\"subjectEvaluationType\": \"Mista\","
-                    + "\"subjectAttendance\": \"20\","
                     + "\"subjectYear\": " + year + ","
                     + "\"subjectSemester\": " + semester
                     + "}";
