@@ -6,6 +6,7 @@ import com.example.qsproject.qsproject.Evaluation;
 import com.example.qsproject.qsproject.Exceptions;
 import com.example.qsproject.qsproject.Subject;
 import com.example.qsproject.qsproject.dtos.EvaluationDto;
+import com.example.qsproject.qsproject.dtos.SubjectDto;
 import com.example.qsproject.qsproject.mappers.EvaluationMapper;
 import com.example.qsproject.qsproject.repositories.ClassroomRepository;
 import com.example.qsproject.qsproject.repositories.SubjectRepository;
@@ -51,6 +52,20 @@ public class EvaluationImpl implements EvaluationServices {
     @Override
     public EvaluationDto createEvaluation(EvaluationDto evaluationDto) {
 
+        long subjectId = evaluationDto.getSubjectId();
+
+        Subject specificSubject = subjectRepository.findById(subjectId)
+                .orElseThrow(() -> new RuntimeException("Subject not found"));
+
+        int numberOfStudents = specificSubject.getStudentsEnrolled();
+
+        Classroom assignedClassroom = classroomRepository.findAll().stream()
+                .filter(classroom -> classroom.getCapacity() >= numberOfStudents)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("No classrooms available"));
+
+        evaluationDto.setClassroomId(assignedClassroom.getClassroomId());
+
         if (evaluationDto.getEvaluationWeight() <= 0) {
             throw new RuntimeException("The evaluation weight cannot be negative or zero.");
         }
@@ -79,7 +94,6 @@ public class EvaluationImpl implements EvaluationServices {
 
         return EvaluationMapper.mapToEvaluationDto(evaluation);
     }
-
 
 
     /**
