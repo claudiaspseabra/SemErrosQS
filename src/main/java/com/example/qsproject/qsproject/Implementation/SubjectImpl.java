@@ -48,6 +48,17 @@ public class SubjectImpl implements SubjectService {
 
     @Override
     public SubjectDto createSubject(SubjectDto subjectDto) {
+
+        long courseId = subjectDto.getCourseId();
+        Course specificCourse = courseRepository.findById(courseId)
+                .orElseThrow(() -> new RuntimeException("Course not found"));
+
+        long durationCourse = specificCourse.getCourseDuration();
+
+        if (subjectDto.getSubjectYear() < 1 || subjectDto.getSubjectYear() > durationCourse) {
+            throw new RuntimeException("The subject year must be between 1 and the course duration.");
+        }
+
         Subject subject = SubjectMapper.mapToSubject(subjectDto);
         Subject saveSubject = subjectRepository.save(subject);
         return SubjectMapper.mapToSubjectDto(saveSubject);
@@ -115,12 +126,12 @@ public class SubjectImpl implements SubjectService {
                 () -> new Exceptions("Subject does not exist with this id: "+subjectId)
         );
 
-        subject.setSubjectName(updatedSubject.getSubjectName());
-        subject.setStudentsEnrolled(updatedSubject.getStudentsEnrolled());
+        //subject.setSubjectName(updatedSubject.getSubjectName());
+        //subject.setStudentsEnrolled(updatedSubject.getStudentsEnrolled());
         subject.setSubjectEvaluationType(updatedSubject.getSubjectEvaluationType());
         subject.setSubjectAttendance(updatedSubject.getSubjectAttendance());
-        subject.setSubjectYear(updatedSubject.getSubjectYear());
-        subject.setSubjectSemester(updatedSubject.getSubjectSemester());
+        //subject.setSubjectYear(updatedSubject.getSubjectYear());
+        //subject.setSubjectSemester(updatedSubject.getSubjectSemester());
 
 
         Subject updatedSubjectObj = subjectRepository.save(subject);
