@@ -20,6 +20,7 @@ public class postInfo {
 
     private static final String COURSE_URL = "http://localhost:8080/app/courses";
     private static final String SUBJECT_URL = "http://localhost:8080/app/subjects";
+    private static final String USER_URL = "http://localhost:8080/app/users";
     private static final RestTemplate restTemplate = new RestTemplate();
 
 
@@ -73,6 +74,8 @@ public class postInfo {
             HttpEntity<String> courseRequest = new HttpEntity<>(courseJson, headers);
             ResponseEntity<String> courseResponse = restTemplate.exchange(COURSE_URL, HttpMethod.POST, courseRequest, String.class);
         }
+
+
     }
 
 
@@ -210,4 +213,53 @@ public class postInfo {
             ResponseEntity<String> subjectResponse = restTemplate.exchange(SUBJECT_URL, HttpMethod.POST, subjectRequest, String.class);
         }
     }
+    private static boolean userExists(String username) {
+        ResponseEntity<List> response = restTemplate.exchange(
+                USER_URL,
+                HttpMethod.GET,
+                null,
+                List.class
+        );
+
+        List<?> users = response.getBody();
+
+        return users != null && users.stream().anyMatch(user ->
+                ((String) ((java.util.Map) user).get("username")).equals(username)
+        );
+    }
+
+
+    public static void postUser() {
+        String username = "adm";
+        String password = "123";
+        String name = "admin";
+        boolean isAdmin = true;
+
+        if (userExists(username)) {
+            System.out.println("User already exists: " + username);
+            return;
+        }
+
+        String userJson = "{"
+                + "\"username\": \"" + username + "\","
+                + "\"password\": \"" + password + "\","
+                + "\"name\": \"" + name + "\","
+                + "\"admin\": " + isAdmin
+                + "}";
+        System.out.println("isAdmin value: " + isAdmin);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        HttpEntity<String> userRequest = new HttpEntity<>(userJson, headers);
+
+        ResponseEntity<String> userResponse = restTemplate.exchange(USER_URL, HttpMethod.POST, userRequest, String.class);
+
+        if (userResponse.getStatusCode() == HttpStatus.CREATED) {
+            System.out.println("User created: " + username);
+        } else {
+            System.out.println("Error: " + userResponse.getBody());
+        }
+
+    }
+
 }
+
