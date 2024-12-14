@@ -233,6 +233,11 @@ public class postInfo {
         String username = "adm";
         String password = "123";
         String name = "admin";
+        boolean isAdmin1 = false;
+
+        String username1 = "user";
+        String password1 = "123";
+        String name1 = "userUser";
         boolean isAdmin = true;
 
         if (userExists(username)) {
@@ -246,17 +251,29 @@ public class postInfo {
                 + "\"name\": \"" + name + "\","
                 + "\"admin\": " + isAdmin
                 + "}";
+
+        String userJson1 = "{"
+                + "\"username\": \"" + username1 + "\","
+                + "\"password\": \"" + password1 + "\","
+                + "\"name\": \"" + name1 + "\","
+                + "\"admin\": " + isAdmin1
+                + "}";
+
         System.out.println("isAdmin value: " + isAdmin);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> userRequest = new HttpEntity<>(userJson, headers);
+        HttpEntity<String> userRequest1 = new HttpEntity<>(userJson1, headers);
 
         ResponseEntity<String> userResponse = restTemplate.exchange(USER_URL, HttpMethod.POST, userRequest, String.class);
+        ResponseEntity<String> userResponse1 = restTemplate.exchange(USER_URL, HttpMethod.POST, userRequest1, String.class);
 
-        if (userResponse.getStatusCode() == HttpStatus.CREATED) {
+        if (userResponse.getStatusCode() == HttpStatus.CREATED && userResponse1.getStatusCode() == HttpStatus.CREATED) {
             System.out.println("User created: " + username);
+            System.out.println("User created: " + username1);
         } else {
             System.out.println("Error: " + userResponse.getBody());
+            System.out.println("Error: " + userResponse1.getBody());
         }
 
     }

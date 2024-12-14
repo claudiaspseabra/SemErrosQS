@@ -64,6 +64,12 @@ public class EvaluationImpl implements EvaluationServices {
         LocalDate evaluationDate = evaluationDto.getEvaluationDate();
         LocalTime evaluationTime = evaluationDto.getEvaluationHour();
 
+
+
+        if(evaluationDto.getEvaluationType().equals("Exercício Prático Individual")){
+            evaluationDto.setComputer(true);
+        }
+
         Optional<Evaluation> existingEvaluationForSameCourseOnSameDay = evaluationRepository
                 .findByClassroom_ClassroomIdAndEvaluationDateAndEvaluationtHour(courseId, evaluationDate, evaluationTime);
 

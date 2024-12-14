@@ -85,5 +85,8 @@ public class Evaluation {
 
     @Column(name = "evaluationHour", nullable = false)
     private LocalTime evaluationtHour;
+
+    @Column(name = "computer" , nullable = false)
+    private boolean computer = false;
 }
 
