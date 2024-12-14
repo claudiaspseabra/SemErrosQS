@@ -44,7 +44,7 @@ public class Evaluation {
      * This field is unique and cannot be null.
      */
 
-    @Column(name = "evaluationType", nullable = false, unique = true)
+    @Column(name = "evaluationType", nullable = false)
     private String evaluationType;
 
     /**
