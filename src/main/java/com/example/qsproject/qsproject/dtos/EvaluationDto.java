@@ -29,9 +29,9 @@ import java.time.LocalTime;
 public class EvaluationDto {
     private long evaluationId;
     private String evaluationType;
-    private double evaluationWeight;
+    private long evaluationWeight;
     private LocalDate evaluationDate;
     private long subjectId;
     private long classroomId;
-    private LocalTime evaluationtHour;
+    private LocalTime evaluationHour;
 }
