@@ -6,7 +6,7 @@ import com.example.qsproject.qsproject.dtos.UsersDto;
 
 /**
  * @version 1.0
- * @author Group 6
+ * @author Sem Erros
  */
 
 /**
