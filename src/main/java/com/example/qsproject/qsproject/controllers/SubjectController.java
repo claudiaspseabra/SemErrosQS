@@ -53,8 +53,8 @@ public class SubjectController {
 
     @PostMapping
     public ResponseEntity<?> createSubject(@RequestBody SubjectDto subjectDto) {
-        if (subjectDto.getSubjectAttendance() != null && !"sim".equalsIgnoreCase(subjectDto.getSubjectAttendance()) && !"nao".equalsIgnoreCase(subjectDto.getSubjectAttendance())) {
-            return ResponseEntity.badRequest().body("Attendance must be 'sim' or 'nao'.");
+        if (subjectDto.getSubjectAttendance() != null && !"S".equalsIgnoreCase(subjectDto.getSubjectAttendance()) && !"N".equalsIgnoreCase(subjectDto.getSubjectAttendance())) {
+            return ResponseEntity.badRequest().body("Attendance must be 'S' or 'N'.");
         }
         if (subjectDto.getSubjectSemester() != 1 && subjectDto.getSubjectSemester()!= 2) {
             return ResponseEntity.badRequest().body("Semester must be 1 or 2.");
