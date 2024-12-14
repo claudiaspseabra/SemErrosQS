@@ -62,7 +62,7 @@ public class EvaluationImpl implements EvaluationServices {
                 .orElseThrow(() -> new RuntimeException("Course not found"));
 
         LocalDate evaluationDate = evaluationDto.getEvaluationDate();
-        LocalTime evaluationTime = evaluationDto.getEvaluationtHour();
+        LocalTime evaluationTime = evaluationDto.getEvaluationHour();
 
         Optional<Evaluation> existingEvaluationForSameCourseOnSameDay = evaluationRepository
                 .findByClassroom_ClassroomIdAndEvaluationDateAndEvaluationtHour(courseId, evaluationDate, evaluationTime);

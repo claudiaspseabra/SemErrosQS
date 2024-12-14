@@ -53,7 +53,7 @@ public class Evaluation {
      */
 
     @Column(name = "evaluationWeight", nullable = false)
-    private double evaluationWeight;
+    private long evaluationWeight;
 
 
     /**
@@ -83,7 +83,7 @@ public class Evaluation {
     @JoinColumn(name = "classroom_id", nullable = false)
     private Classroom classroom;
 
-    @Column(name = "evaluationtHour", nullable = false)
+    @Column(name = "evaluationHour", nullable = false)
     private LocalTime evaluationtHour;
 }
 

@@ -80,7 +80,7 @@ public class EvaluationMapper {
                 evaluationDto.getEvaluationDate(),
                 subject,
                 classroom,
-                evaluationDto.getEvaluationtHour()
+                evaluationDto.getEvaluationHour()
         );
     }
 
