@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * @version 1.0
- * @author Group 6
+ * @author Sem Erros
  */
 
 /**

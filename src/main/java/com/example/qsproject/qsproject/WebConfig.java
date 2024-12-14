@@ -6,24 +6,27 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * @version 1.0
- * @author Group 6
+ * @author Sem Erros
  */
 
 /**
  * Configures Cross-Origin Resource Sharing (CORS) to allow requests from "http://localhost:5173" for local development.
  */
 
+
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
     /**
-     * Configures the CORS mapping to allow requests from the specified origin.
+     * Configura as permissões de CORS para permitir requisições da origem especificada.
      *
-     * @param registry The CorsRegistry object that holds the CORS mappings.
+     * @param registry O objeto CorsRegistry que contém as configurações de CORS.
      */
-
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("http://localhost:5173");
+        registry.addMapping("/**")
+                .allowedOrigins("http://localhost:5173")
+                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                .allowedHeaders("Content-Type", "Authorization", "X-Custom-Header");
     }
 }

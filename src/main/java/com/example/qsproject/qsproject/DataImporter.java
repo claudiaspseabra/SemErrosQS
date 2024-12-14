@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @version 1.0
- * @author Group 6
+ * @author Sem Erros
  */
 
 /**

@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 /**
  * @version 1.0
- * @author Group 6
+ * @author Sem Erros
  */
 
 /**
@@ -121,6 +121,7 @@ public class SubjectImpl implements SubjectService {
         subject.setSubjectAttendance(updatedSubject.getSubjectAttendance());
         subject.setSubjectYear(updatedSubject.getSubjectYear());
         subject.setSubjectSemester(updatedSubject.getSubjectSemester());
+
 
         Subject updatedSubjectObj = subjectRepository.save(subject);
 

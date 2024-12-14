@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Bean;
 
 /**
  * @version 1.0
- * @author Group 6
+ * @author Sem Erros
  */
 
 /**
