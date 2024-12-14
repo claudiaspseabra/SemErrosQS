@@ -118,8 +118,8 @@ public class SubjectController {
 
     @PutMapping("{id}")
     public ResponseEntity<?> updateSubject(@PathVariable("id") long subjectId,@RequestBody SubjectDto updatedSubject){
-        if (updatedSubject.getSubjectAttendance() != null && !"sim".equalsIgnoreCase(updatedSubject.getSubjectAttendance()) && !"nao".equalsIgnoreCase(updatedSubject.getSubjectAttendance())) {
-            return ResponseEntity.badRequest().body("Attendance must be 'sim' or 'nao'.");
+        if (updatedSubject.getSubjectAttendance() != null && !"S".equalsIgnoreCase(updatedSubject.getSubjectAttendance()) && !"N".equalsIgnoreCase(updatedSubject.getSubjectAttendance())) {
+            return ResponseEntity.badRequest().body("Attendance must be 'S' or 'N'.");
         }
 
         SubjectDto subjectDto = subjectService.updateSubject(subjectId,updatedSubject);
