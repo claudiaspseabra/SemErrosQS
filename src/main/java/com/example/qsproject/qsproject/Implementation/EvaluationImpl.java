@@ -1,21 +1,21 @@
 package com.example.qsproject.qsproject.Implementation;
 
 
-import com.example.qsproject.qsproject.Classroom;
-import com.example.qsproject.qsproject.Evaluation;
-import com.example.qsproject.qsproject.Exceptions;
-import com.example.qsproject.qsproject.Subject;
+import com.example.qsproject.qsproject.*;
 import com.example.qsproject.qsproject.dtos.EvaluationDto;
 import com.example.qsproject.qsproject.dtos.SubjectDto;
 import com.example.qsproject.qsproject.mappers.EvaluationMapper;
 import com.example.qsproject.qsproject.repositories.ClassroomRepository;
+import com.example.qsproject.qsproject.repositories.CourseRepository;
 import com.example.qsproject.qsproject.repositories.SubjectRepository;
 import com.example.qsproject.qsproject.repositories.EvaluationRepository;
 import com.example.qsproject.qsproject.services.EvaluationServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -40,6 +40,8 @@ public class EvaluationImpl implements EvaluationServices {
     @Autowired
     private EvaluationRepository evaluationRepository;
 
+    @Autowired
+    private CourseRepository courseRepository;
 
     /**
      * Creates a new evaluation using the provided EvaluationDto and fetches the associated Subject and Classroom entities.
@@ -53,12 +55,23 @@ public class EvaluationImpl implements EvaluationServices {
     public EvaluationDto createEvaluation(EvaluationDto evaluationDto) {
 
         long subjectId = evaluationDto.getSubjectId();
-
         Subject specificSubject = subjectRepository.findById(subjectId)
                 .orElseThrow(() -> new RuntimeException("Subject not found"));
 
-        int numberOfStudents = specificSubject.getStudentsEnrolled();
+        long courseId = specificSubject.getCourses().getCourseId();
+        Course specificCourse = courseRepository.findById(courseId)
+                .orElseThrow(() -> new RuntimeException("Course not found"));
 
+        LocalDate evaluationDate = evaluationDto.getEvaluationDate();
+
+        Optional<Evaluation> existingEvaluationForSameCourseOnSameDay = evaluationRepository
+                .findBySubject_Courses_CourseIdAndEvaluationDate(courseId, evaluationDate);
+
+        if (existingEvaluationForSameCourseOnSameDay.isPresent()) {
+            throw new RuntimeException("This course already has an evaluation scheduled for this day.");
+        }
+
+        int numberOfStudents = specificSubject.getStudentsEnrolled();
         Classroom assignedClassroom = classroomRepository.findAll().stream()
                 .filter(classroom -> classroom.getCapacity() >= numberOfStudents)
                 .findFirst()
@@ -82,6 +95,7 @@ public class EvaluationImpl implements EvaluationServices {
             throw new RuntimeException("The sum of the evaluation weights for this Subject cannot exceed 100%");
         }
 
+
         Classroom classroom = classroomRepository.findById(evaluationDto.getClassroomId())
                 .orElseThrow(() -> new RuntimeException("Classroom not found"));
 
@@ -94,7 +108,6 @@ public class EvaluationImpl implements EvaluationServices {
 
         return EvaluationMapper.mapToEvaluationDto(evaluation);
     }
-
 
     /**
      * Retrieves an evaluation by its ID.

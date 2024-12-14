@@ -122,6 +122,7 @@ public class SubjectImpl implements SubjectService {
         subject.setSubjectYear(updatedSubject.getSubjectYear());
         subject.setSubjectSemester(updatedSubject.getSubjectSemester());
 
+
         Subject updatedSubjectObj = subjectRepository.save(subject);
 
         return SubjectMapper.mapToSubjectDto(updatedSubjectObj);
