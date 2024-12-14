@@ -195,4 +195,13 @@ public class EvaluationImpl implements EvaluationServices {
         Evaluation updateEvaluationObj = evaluationRepository.save(evaluation);
         return EvaluationMapper.mapToEvaluationDto(updateEvaluationObj);
     }
+
+
+    @Override
+    public List<EvaluationDto> getEvaluationsBySubjectId(long subjectId) {
+        List<Evaluation> evaluations = evaluationRepository.findBySubject_SubjectId(subjectId);
+        return EvaluationMapper.mapToEvaluationDto(evaluations);
+    }
+
+
 }

@@ -65,4 +65,7 @@ public interface EvaluationServices {
      */
 
     EvaluationDto updateEvaluations(long evaluationId, Evaluation updateEvalution);
+
+    List<EvaluationDto> getEvaluationsBySubjectId(long subjectId);
+
 }
