@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * @version 1.0
- * @author Sem Erros
+ * @author Sem Errosv
  */
 
 /**
