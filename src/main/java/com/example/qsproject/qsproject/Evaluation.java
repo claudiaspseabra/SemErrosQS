@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * @version 1.0
@@ -81,5 +82,8 @@ public class Evaluation {
     @ManyToOne
     @JoinColumn(name = "classroom_id", nullable = false)
     private Classroom classroom;
+
+    @Column(name = "evaluationtHour", nullable = false)
+    private LocalTime evaluationtHour;
 }
 

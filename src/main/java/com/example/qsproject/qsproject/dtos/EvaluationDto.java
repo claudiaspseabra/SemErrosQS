@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 /**
@@ -32,4 +33,5 @@ public class EvaluationDto {
     private LocalDate evaluationDate;
     private long subjectId;
     private long classroomId;
+    private LocalTime evaluationtHour;
 }

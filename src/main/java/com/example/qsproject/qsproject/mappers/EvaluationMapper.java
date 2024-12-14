@@ -35,7 +35,8 @@ public class EvaluationMapper {
                 evaluation.getEvaluationWeight(),
                 evaluation.getEvaluationDate(),
                 evaluation.getSubject() != null ? evaluation.getSubject().getSubjectId() : 0L,
-                evaluation.getClassroom() != null ? evaluation.getClassroom().getClassroomId() : 0L
+                evaluation.getClassroom() != null ? evaluation.getClassroom().getClassroomId() : 0L,
+                evaluation.getEvaluationtHour()
         );
     }
 
@@ -78,7 +79,8 @@ public class EvaluationMapper {
                 evaluationDto.getEvaluationWeight(),
                 evaluationDto.getEvaluationDate(),
                 subject,
-                classroom
+                classroom,
+                evaluationDto.getEvaluationtHour()
         );
     }
 
