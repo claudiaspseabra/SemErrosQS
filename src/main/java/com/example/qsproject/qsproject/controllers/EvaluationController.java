@@ -83,8 +83,15 @@ public class EvaluationController {
      */
 
     @GetMapping()
-    public ResponseEntity<List<EvaluationDto>> getAllEvaluations(){
-        List<EvaluationDto> evaluations = evaluationServices.getAllEvaluations();
+    public ResponseEntity<List<EvaluationDto>> getAllEvaluations(@RequestParam(value = "subjectId", required = false) Long subjectId) {
+        List<EvaluationDto> evaluations;
+        if (subjectId != null) {
+            evaluations = evaluationServices.getEvaluationsBySubjectId(subjectId);
+        } else {
+            evaluations = evaluationServices.getAllEvaluations();
+        }
+
         return ResponseEntity.ok(evaluations);
     }
+
 }
