@@ -26,6 +26,8 @@ public class QsprojectApplication {
 		return args -> {
 			postInfo.postCourses();
 			postInfo.postSubjects();
+			postInfo.postUser();
 		};
 	}
+
 }

@@ -1,5 +1,6 @@
 package com.example.qsproject.qsproject;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -67,6 +68,6 @@ public class User {
      * This field cannot be null.
      */
 
-    @Column(name = "is_admin", nullable = false)
+    @Column(name = "isAdmin", nullable = false)
     private boolean isAdmin;
 }
