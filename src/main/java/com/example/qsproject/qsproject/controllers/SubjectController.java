@@ -54,7 +54,10 @@ public class SubjectController {
     @PostMapping
     public ResponseEntity<?> createSubject(@RequestBody SubjectDto subjectDto) {
         if (subjectDto.getSubjectAttendance() != null && !"sim".equalsIgnoreCase(subjectDto.getSubjectAttendance()) && !"nao".equalsIgnoreCase(subjectDto.getSubjectAttendance())) {
-            return ResponseEntity.badRequest().body("Attendance must be 'sim' or 'nao'");
+            return ResponseEntity.badRequest().body("Attendance must be 'sim' or 'nao'.");
+        }
+        if (subjectDto.getSubjectSemester() != 1 && subjectDto.getSubjectSemester()!= 2) {
+            return ResponseEntity.badRequest().body("Semester must be 1 or 2.");
         }
 
         SubjectDto savedSubjectDto = subjectService.createSubject(subjectDto);
@@ -112,8 +115,13 @@ public class SubjectController {
      * @return A ResponseEntity containing the updated SubjectDto.
      */
 
+
     @PutMapping("{id}")
-    public ResponseEntity<SubjectDto> updateSubject(@PathVariable("id") long subjectId,@RequestBody SubjectDto updatedSubject){
+    public ResponseEntity<?> updateSubject(@PathVariable("id") long subjectId,@RequestBody SubjectDto updatedSubject){
+        if (updatedSubject.getSubjectAttendance() != null && !"sim".equalsIgnoreCase(updatedSubject.getSubjectAttendance()) && !"nao".equalsIgnoreCase(updatedSubject.getSubjectAttendance())) {
+            return ResponseEntity.badRequest().body("Attendance must be 'sim' or 'nao'.");
+        }
+
         SubjectDto subjectDto = subjectService.updateSubject(subjectId,updatedSubject);
         return ResponseEntity.ok(subjectDto);
     }
