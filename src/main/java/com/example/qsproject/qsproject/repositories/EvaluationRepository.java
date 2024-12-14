@@ -4,6 +4,7 @@ import com.example.qsproject.qsproject.Evaluation;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,4 +22,5 @@ public interface EvaluationRepository extends JpaRepository<Evaluation,Long> {
     //List<Evaluation> findBySubject_Id(long subjectId);
     List<Evaluation> findBySubject_SubjectId(long subjectId);
     Optional<Evaluation> findBySubject_Courses_CourseIdAndEvaluationDate(long courseId, LocalDate evaluationDate);
-}
+    Optional<Evaluation> findByClassroom_ClassroomIdAndEvaluationDateAndEvaluationtHour(long classroomId, LocalDate evaluationDate, LocalTime evaluationTime);}
+

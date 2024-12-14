@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -50,10 +51,8 @@ public class EvaluationImpl implements EvaluationServices {
      * @return A EvaluationDto object representing the newly created evaluation.
      * @throws RuntimeException If the Subject or Classroom is not found.
      */
-
     @Override
     public EvaluationDto createEvaluation(EvaluationDto evaluationDto) {
-
         long subjectId = evaluationDto.getSubjectId();
         Subject specificSubject = subjectRepository.findById(subjectId)
                 .orElseThrow(() -> new RuntimeException("Subject not found"));
@@ -63,21 +62,40 @@ public class EvaluationImpl implements EvaluationServices {
                 .orElseThrow(() -> new RuntimeException("Course not found"));
 
         LocalDate evaluationDate = evaluationDto.getEvaluationDate();
+        LocalTime evaluationTime = evaluationDto.getEvaluationtHour();
 
         Optional<Evaluation> existingEvaluationForSameCourseOnSameDay = evaluationRepository
-                .findBySubject_Courses_CourseIdAndEvaluationDate(courseId, evaluationDate);
+                .findByClassroom_ClassroomIdAndEvaluationDateAndEvaluationtHour(courseId, evaluationDate, evaluationTime);
 
         if (existingEvaluationForSameCourseOnSameDay.isPresent()) {
-            throw new RuntimeException("This course already has an evaluation scheduled for this day.");
+            throw new RuntimeException("This course already has an evaluation scheduled for this day and time.");
         }
 
-        int numberOfStudents = specificSubject.getStudentsEnrolled();
-        Classroom assignedClassroom = classroomRepository.findAll().stream()
-                .filter(classroom -> classroom.getCapacity() >= numberOfStudents)
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("No classrooms available"));
+        if (evaluationDto.getClassroomId() == 0) {
+            Classroom assignedClassroom = classroomRepository.findAll().stream()
+                    .filter(classroom -> classroom.getCapacity() >= specificSubject.getStudentsEnrolled())
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("No available classrooms for this evaluation."));
 
-        evaluationDto.setClassroomId(assignedClassroom.getClassroomId());
+            evaluationDto.setClassroomId(assignedClassroom.getClassroomId());
+        }
+
+        Optional<Evaluation> existingEvaluationAtSameTime = evaluationRepository
+                .findByClassroom_ClassroomIdAndEvaluationDateAndEvaluationtHour(
+                        evaluationDto.getClassroomId(), evaluationDate, evaluationTime);
+
+        if (existingEvaluationAtSameTime.isPresent()) {
+            Classroom assignedClassroom = classroomRepository.findAll().stream()
+                    .filter(classroom -> classroom.getCapacity() >= specificSubject.getStudentsEnrolled())
+                    .filter(classroom -> classroom.getClassroomId() != evaluationDto.getClassroomId())
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("No available classrooms for this evaluation."));
+
+            evaluationDto.setClassroomId(assignedClassroom.getClassroomId());
+        }
+
+        Classroom classroom = classroomRepository.findById(evaluationDto.getClassroomId())
+                .orElseThrow(() -> new RuntimeException("Classroom not found"));
 
         if (evaluationDto.getEvaluationWeight() <= 0) {
             throw new RuntimeException("The evaluation weight cannot be negative or zero.");
@@ -95,19 +113,16 @@ public class EvaluationImpl implements EvaluationServices {
             throw new RuntimeException("The sum of the evaluation weights for this Subject cannot exceed 100%");
         }
 
-
-        Classroom classroom = classroomRepository.findById(evaluationDto.getClassroomId())
-                .orElseThrow(() -> new RuntimeException("Classroom not found"));
-
-        evaluationDto.setSubjectId(subject.getSubjectId());
-        evaluationDto.setClassroomId(classroom.getClassroomId());
-
         Evaluation evaluation = EvaluationMapper.mapToEvaluation(evaluationDto);
-
         evaluation = evaluationRepository.save(evaluation);
 
         return EvaluationMapper.mapToEvaluationDto(evaluation);
     }
+
+
+
+
+
 
     /**
      * Retrieves an evaluation by its ID.
