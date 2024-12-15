@@ -52,7 +52,6 @@ public class EvaluationImpl implements EvaluationServices {
      * @throws RuntimeException If the Subject or Classroom is not found.
      */
 
-
     @Override
     public EvaluationDto createEvaluation(EvaluationDto evaluationDto) {
         long subjectId = evaluationDto.getSubjectId();
@@ -73,28 +72,36 @@ public class EvaluationImpl implements EvaluationServices {
             throw new RuntimeException("This course already has an evaluation scheduled for this day and time.");
         }
 
-        if (evaluationDto.getEvaluationType().equals("Exercício Prático Individual")) {
+        if(evaluationDto.getEvaluationType().equals("Exercício Prático Individual")){
             evaluationDto.setComputer(true);
         }
-
-        if (evaluationDto.getClassroomId() == 0) {
+        if (evaluationDto.isComputer()) {
             Classroom assignedClassroom = classroomRepository.findAll().stream()
+                    .filter(classroom -> "computadores".equals(classroom.getClassroomType()))
                     .filter(classroom -> classroom.getCapacity() >= specificSubject.getStudentsEnrolled())
+                    .filter(classroom -> {
+                        Optional<Evaluation> existingEvaluationForRoom = evaluationRepository
+                                .findByClassroom_ClassroomIdAndEvaluationDateAndEvaluationtHour(classroom.getClassroomId(), evaluationDate, evaluationTime);
+                        return !existingEvaluationForRoom.isPresent();
+                    })
                     .findFirst()
-                    .orElseThrow(() -> new RuntimeException("No available classrooms for this evaluation."));
-            evaluationDto.setClassroomId(assignedClassroom.getClassroomId());
-        }
+                    .orElseThrow(() -> new RuntimeException("No available classrooms with computers for this evaluation."));
 
-        Optional<Evaluation> existingEvaluationAtSameTime = evaluationRepository
-                .findByClassroom_ClassroomIdAndEvaluationDateAndEvaluationtHour(evaluationDto.getClassroomId(), evaluationDate, evaluationTime);
-
-        if (existingEvaluationAtSameTime.isPresent()) {
-            Classroom assignedClassroom = classroomRepository.findAll().stream()
-                    .filter(classroom -> classroom.getCapacity() >= specificSubject.getStudentsEnrolled())
-                    .filter(classroom -> classroom.getClassroomId() != evaluationDto.getClassroomId())
-                    .findFirst()
-                    .orElseThrow(() -> new RuntimeException("No available classrooms for this evaluation."));
             evaluationDto.setClassroomId(assignedClassroom.getClassroomId());
+        } else {
+            if (evaluationDto.getClassroomId() == 0) {
+                Classroom assignedClassroom = classroomRepository.findAll().stream()
+                        .filter(classroom -> classroom.getCapacity() >= specificSubject.getStudentsEnrolled())
+                        .filter(classroom -> {
+                            Optional<Evaluation> existingEvaluationForRoom = evaluationRepository
+                                    .findByClassroom_ClassroomIdAndEvaluationDateAndEvaluationtHour(classroom.getClassroomId(), evaluationDate, evaluationTime);
+                            return !existingEvaluationForRoom.isPresent();
+                        })
+                        .findFirst()
+                        .orElseThrow(() -> new RuntimeException("No available classrooms for this evaluation."));
+
+                evaluationDto.setClassroomId(assignedClassroom.getClassroomId());
+            }
         }
 
         Classroom classroom = classroomRepository.findById(evaluationDto.getClassroomId())
