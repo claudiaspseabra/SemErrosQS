@@ -37,7 +37,7 @@ public class ClassroomImplTest {
         classroomDto.setTag("301");
         classroomDto.setDescription("Sala de Aula");
         classroomDto.setClassroomType("Mesas");
-        classroomDto.setCapacity(104);
+        classroomDto.setCapacity(60);
     }
 
     @Test
