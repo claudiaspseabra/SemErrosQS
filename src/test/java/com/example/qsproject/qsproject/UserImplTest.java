@@ -40,7 +40,7 @@ public class UserImplTest {
 
     @Test
     public void testCreateUser() {
-        when(usersRespository.save(any(User.class))).thenReturn(new User(1L, "Test User", "password123", "testuser", true));
+        when(usersRespository.save(any(User.class))).thenReturn(new User(1L, "Test User", "password123", "testuser", true,null));
         UsersDto result = userImpl.createUser(usersDto);
 
         assertNotNull(result);

@@ -35,4 +35,5 @@ public class EvaluationDto {
     private long classroomId;
     private LocalTime evaluationHour;
     private boolean computer;
+    private long evaluationPosition;
 }

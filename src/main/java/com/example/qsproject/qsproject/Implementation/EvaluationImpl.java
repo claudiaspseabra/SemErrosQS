@@ -198,6 +198,7 @@ public class EvaluationImpl implements EvaluationServices {
         );
         evaluation.setEvaluationType(updateEvalution.getEvaluationType());
         evaluation.setEvaluationWeight(updateEvalution.getEvaluationWeight());
+        //evaluation.getEvaluationPosition(updateEvalution.getEvaluationPosition());
         Evaluation updateEvaluationObj = evaluationRepository.save(evaluation);
         return EvaluationMapper.mapToEvaluationDto(updateEvaluationObj);
     }

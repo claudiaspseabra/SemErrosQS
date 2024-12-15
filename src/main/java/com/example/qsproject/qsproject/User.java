@@ -70,4 +70,8 @@ public class User {
 
     @Column(name = "isAdmin", nullable = false)
     private boolean isAdmin;
+
+
+    @Column(name = "courseAtt")
+    private String courseAtt;
 }

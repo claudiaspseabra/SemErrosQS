@@ -27,4 +27,5 @@ public class UsersDto {
     private String password;
     private String username;
     private boolean isAdmin;
+    private String courseAtt;
 }

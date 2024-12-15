@@ -37,7 +37,8 @@ public class EvaluationMapper {
                 evaluation.getSubject() != null ? evaluation.getSubject().getSubjectId() : 0L,
                 evaluation.getClassroom() != null ? evaluation.getClassroom().getClassroomId() : 0L,
                 evaluation.getEvaluationtHour(),
-                evaluation.isComputer()
+                evaluation.isComputer(),
+                evaluation.getEvaluationPosition()
         );
     }
 
@@ -82,7 +83,8 @@ public class EvaluationMapper {
                 subject,
                 classroom,
                 evaluationDto.getEvaluationHour(),
-                evaluationDto.isComputer()
+                evaluationDto.isComputer(),
+                evaluationDto.getEvaluationPosition()
         );
     }
 
