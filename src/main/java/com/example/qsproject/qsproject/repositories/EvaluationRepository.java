@@ -19,8 +19,13 @@ import java.util.Optional;
  */
 
 public interface EvaluationRepository extends JpaRepository<Evaluation,Long> {
-    //List<Evaluation> findBySubject_Id(long subjectId);
     List<Evaluation> findBySubject_SubjectId(long subjectId);
     Optional<Evaluation> findBySubject_Courses_CourseIdAndEvaluationDate(long courseId, LocalDate evaluationDate);
-    Optional<Evaluation> findByClassroom_ClassroomIdAndEvaluationDateAndEvaluationtHour(long classroomId, LocalDate evaluationDate, LocalTime evaluationTime);}
+    Optional<Evaluation> findByClassroom_ClassroomIdAndEvaluationDateAndEvaluationtHour(long classroomId, LocalDate evaluationDate, LocalTime evaluationTime);
+    Optional<Evaluation> findBySubject_SubjectIdAndEvaluationDateAndEvaluationtHour(long subjectId, LocalDate evaluationDate, LocalTime evaluationTime);
+    Optional<Evaluation> findBySubject_Courses_CourseIdAndEvaluationDateAndEvaluationtHour(long courseId, LocalDate evaluationDate, LocalTime evaluationTime);
+    Optional<Evaluation> findBySubject_Courses_CourseIdNotAndEvaluationDateAndEvaluationtHour(long courseId, LocalDate evaluationDate, LocalTime evaluationTime);
+    boolean existsByClassroom_ClassroomIdAndEvaluationDateAndEvaluationtHourBetween(long classroomId, LocalDate evaluationDate, LocalTime startTime, LocalTime endTime);
+
+}
 

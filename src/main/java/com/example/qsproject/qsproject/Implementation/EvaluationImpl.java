@@ -51,6 +51,8 @@ public class EvaluationImpl implements EvaluationServices {
      * @return A EvaluationDto object representing the newly created evaluation.
      * @throws RuntimeException If the Subject or Classroom is not found.
      */
+
+
     @Override
     public EvaluationDto createEvaluation(EvaluationDto evaluationDto) {
         long subjectId = evaluationDto.getSubjectId();
@@ -64,17 +66,15 @@ public class EvaluationImpl implements EvaluationServices {
         LocalDate evaluationDate = evaluationDto.getEvaluationDate();
         LocalTime evaluationTime = evaluationDto.getEvaluationHour();
 
+        Optional<Evaluation> existingEvaluationForSameCourse = evaluationRepository
+                .findBySubject_Courses_CourseIdAndEvaluationDateAndEvaluationtHour(courseId, evaluationDate, evaluationTime);
 
-
-        if(evaluationDto.getEvaluationType().equals("Exercício Prático Individual")){
-            evaluationDto.setComputer(true);
+        if (existingEvaluationForSameCourse.isPresent()) {
+            throw new RuntimeException("This course already has an evaluation scheduled for this day and time.");
         }
 
-        Optional<Evaluation> existingEvaluationForSameCourseOnSameDay = evaluationRepository
-                .findByClassroom_ClassroomIdAndEvaluationDateAndEvaluationtHour(courseId, evaluationDate, evaluationTime);
-
-        if (existingEvaluationForSameCourseOnSameDay.isPresent()) {
-            throw new RuntimeException("This course already has an evaluation scheduled for this day and time.");
+        if (evaluationDto.getEvaluationType().equals("Exercício Prático Individual")) {
+            evaluationDto.setComputer(true);
         }
 
         if (evaluationDto.getClassroomId() == 0) {
@@ -82,13 +82,11 @@ public class EvaluationImpl implements EvaluationServices {
                     .filter(classroom -> classroom.getCapacity() >= specificSubject.getStudentsEnrolled())
                     .findFirst()
                     .orElseThrow(() -> new RuntimeException("No available classrooms for this evaluation."));
-
             evaluationDto.setClassroomId(assignedClassroom.getClassroomId());
         }
 
         Optional<Evaluation> existingEvaluationAtSameTime = evaluationRepository
-                .findByClassroom_ClassroomIdAndEvaluationDateAndEvaluationtHour(
-                        evaluationDto.getClassroomId(), evaluationDate, evaluationTime);
+                .findByClassroom_ClassroomIdAndEvaluationDateAndEvaluationtHour(evaluationDto.getClassroomId(), evaluationDate, evaluationTime);
 
         if (existingEvaluationAtSameTime.isPresent()) {
             Classroom assignedClassroom = classroomRepository.findAll().stream()
@@ -96,7 +94,6 @@ public class EvaluationImpl implements EvaluationServices {
                     .filter(classroom -> classroom.getClassroomId() != evaluationDto.getClassroomId())
                     .findFirst()
                     .orElseThrow(() -> new RuntimeException("No available classrooms for this evaluation."));
-
             evaluationDto.setClassroomId(assignedClassroom.getClassroomId());
         }
 
@@ -116,7 +113,7 @@ public class EvaluationImpl implements EvaluationServices {
 
         totalWeight += evaluationDto.getEvaluationWeight();
         if (totalWeight > 100) {
-            throw new RuntimeException("The sum of the evaluation weights for this Subject cannot exceed 100%");
+            throw new RuntimeException("The sum of the evaluation weights for this subject cannot exceed 100%");
         }
 
         Evaluation evaluation = EvaluationMapper.mapToEvaluation(evaluationDto);
@@ -124,10 +121,6 @@ public class EvaluationImpl implements EvaluationServices {
 
         return EvaluationMapper.mapToEvaluationDto(evaluation);
     }
-
-
-
-
 
 
     /**
@@ -197,7 +190,7 @@ public class EvaluationImpl implements EvaluationServices {
                 () -> new Exceptions("Evaluation does not exist with this id: " + evaluationId)
         );
         evaluation.setEvaluationType(updateEvalution.getEvaluationType());
-        //    evaluation.setEvaluationWeight(updateEvaluation.get());
+        evaluation.setEvaluationWeight(updateEvalution.getEvaluationWeight());
         Evaluation updateEvaluationObj = evaluationRepository.save(evaluation);
         return EvaluationMapper.mapToEvaluationDto(updateEvaluationObj);
     }
