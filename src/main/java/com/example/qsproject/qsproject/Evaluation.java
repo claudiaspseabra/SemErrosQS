@@ -88,5 +88,9 @@ public class Evaluation {
 
     @Column(name = "computer" , nullable = false)
     private boolean computer = false;
+
+
+    @Column(name = "evaluationPosition")
+    private long evaluationPosition;
 }
 

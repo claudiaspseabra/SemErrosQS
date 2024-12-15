@@ -188,16 +188,6 @@ public class postInfo {
                 continue;
             }
 
-//            String subjectJson = "{"
-//                    + "\"subjectName\": \"" + subject + "\","
-//                    + "\"courseId\": " + courseId + ","
-//                    + "\"studentsEnrolled\": 10,"
-//                    + "\"subjectEvaluationType\": \"Mista\","
-//                    + "\"subjectAttendance\": \"20\","
-//                    + "\"subjectYear\": " + year + ","
-//                    + "\"subjectSemester\": " + semester
-//                    + "}";
-
             String subjectJson = "{"
                     + "\"subjectName\": \"" + subject + "\","
                     + "\"courseId\": " + courseId + ","
@@ -233,12 +223,13 @@ public class postInfo {
         String username = "adm";
         String password = "123";
         String name = "admin";
-        boolean isAdmin1 = false;
+        boolean isAdmin = true;
 
         String username1 = "user";
         String password1 = "123";
         String name1 = "userUser";
-        boolean isAdmin = true;
+        boolean isAdmin1 = false;
+        String courseAtt = "Engenharia Informática";
 
         if (userExists(username)) {
             System.out.println("User already exists: " + username);
@@ -253,10 +244,11 @@ public class postInfo {
                 + "}";
 
         String userJson1 = "{"
+                + "\"name\": \"" + name1 + "\","
                 + "\"username\": \"" + username1 + "\","
                 + "\"password\": \"" + password1 + "\","
-                + "\"name\": \"" + name1 + "\","
-                + "\"admin\": " + isAdmin1
+                + "\"admin\": " + isAdmin1 + ","
+                + "\"courseAtt\": \"" + courseAtt + "\""
                 + "}";
 
         System.out.println("isAdmin value: " + isAdmin);
