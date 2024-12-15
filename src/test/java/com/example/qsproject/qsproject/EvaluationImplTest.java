@@ -61,18 +61,19 @@ public class EvaluationImplTest {
 
         subject.setCourses(course1);
         when(courseRepository.findById(anyLong())).thenReturn(Optional.of(course1));
-        classroom = new Classroom(1L, "301", "Sala de Aula", "Mesas", 30, new ArrayList<>());
+        classroom = new Classroom(1L, "301", "Sala de Aula", "computadores", 400, new ArrayList<>());
 
         evaluation = new Evaluation();
         evaluation.setEvaluationId(1L);
-        evaluation.setEvaluationType("Exercício Prático Individual");
+        evaluation.setEvaluationType("Exercício Prático");
         evaluation.setEvaluationWeight(20);
         evaluation.setEvaluationDate(LocalDate.of(2024, 12, 15));
         evaluation.setEvaluationtHour(LocalTime.of(10, 0,0));
+
         evaluation.setClassroom(classroom);
         evaluationDto = new EvaluationDto();
         evaluationDto.setSubjectId(1L);
-        evaluationDto.setEvaluationType("Exercício Prático Individual");
+        evaluationDto.setEvaluationType("Exercício Prático");
         evaluationDto.setEvaluationWeight(20);
         evaluationDto.setEvaluationDate(LocalDate.of(2024, 12, 15));
         evaluationDto.setEvaluationHour(LocalTime.of(10, 0,0));
